@@ -1,0 +1,35 @@
+﻿@namespace ACRViewer.BlazorServer.Components.Pages
+
+@page "/"
+@attribute [Authorize]
+@using System.Security.Claims
+
+<HeroTitle Title="Module Details" Description="Azure bicep registry module details." />
+
+@if (!_loaded)
+{
+    <MudProgressCircular Color="Color.Primary" Indeterminate="true" />
+}
+else
+{
+    if (SelectedItem != null)
+    {
+        switch (SelectedItem.Type)
+        {
+            case ViewModel.TreeViewType.Repository:
+                <Repository RepositoryName="@SelectedItem.Name" />
+                break;
+            case ViewModel.TreeViewType.Tag:
+                <Tag TagName="@SelectedItem.Name" RepositoryName="@SelectedItem.ParentName" />
+                break;
+            default:
+                <MudText Typo="Typo.h6">Select an item to view details.</MudText>
+                break;
+        }
+    }
+    else
+    {
+        <MudText Typo="Typo.h6">Select an item to view details.</MudText>
+    }
+
+}
