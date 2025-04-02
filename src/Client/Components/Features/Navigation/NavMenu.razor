@@ -1,0 +1,21 @@
+﻿@using Microsoft.AspNetCore.Authorization
+
+@attribute [Authorize]
+
+<UserCard />
+<MudNavMenu>
+    <MudDivider Class="my-2" />
+</MudNavMenu>
+<MudTreeView T="TreeViewItemViewModel" ServerData="@LoadServerData" Items="@Repositories">
+    <ItemTemplate>
+        <MudTreeViewItem Value="@context.Value"
+                         Text="@context.Value.Name"   
+                         Items="@context.Children"
+                         OnClick="@(()=> HandleItemClick(@context.Value))"
+                         ItemsChanged="@(new Action<IReadOnlyCollection<TreeItemData<TreeViewItemViewModel>>>(items => OnItemsLoaded(context, items)))"
+                         @bind-Expanded="@context.Expanded"
+                         CanExpand="@context.Expandable"
+                         Icon="@context.Icon"
+                         LoadingIconColor="Color.Info" />
+    </ItemTemplate>
+</MudTreeView>

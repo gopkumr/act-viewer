@@ -1,5 +1,5 @@
 using ACRViewer.BlazorServer.Components;
-using ACRViewer.BlazorServer.Extensions;
+using ACRViewer.BlazorServer.Core.Utilities;
 using Microsoft.AspNetCore.Authentication.OpenIdConnect;
 using Microsoft.Identity.Web;
 using Microsoft.Identity.Web.UI;
@@ -43,7 +43,7 @@ public class Program
 
         app.UseHttpsRedirection();
 
-        app.MapStaticAssets(); 
+        app.MapStaticAssets();
         app.UseRouting();
 
         app.UseAuthentication();
@@ -53,7 +53,7 @@ public class Program
 
         app.MapControllers(); // Required for MicrosoftIdentity controllers
         app.MapRazorPages();  // Required for MicrosoftIdentity Razor pages
-        
+
         app.MapRazorComponents<App>()
             .AddInteractiveServerRenderMode();
 

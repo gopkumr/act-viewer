@@ -1,13 +1,12 @@
-﻿using ACRViewer.BlazorServer.Managers;
-using ACRViewer.BlazorServer.UserPreference;
+﻿using ACRViewer.BlazorServer.Core.Interface;
+using ACRViewer.BlazorServer.Core.Utilities;
 using Microsoft.AspNetCore.Components;
-using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.Identity.Web;
 using MudBlazor;
 
 namespace ACRViewer.BlazorServer.Components.Layout
 {
-    public partial class MainLayout 
+    public partial class MainLayout
     {
         private string CurrentUserId { get; set; } = "";
         private string ImageDataUrl { get; set; } = "";
