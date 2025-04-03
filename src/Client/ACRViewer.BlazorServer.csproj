@@ -4,9 +4,13 @@
     <TargetFramework>net9.0</TargetFramework>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
+    <GenerateAssemblyInfo>true</GenerateAssemblyInfo>
+    <PackageId>Arinco.ModuleHub</PackageId>
+    <Title>Arinco Biceo Module Hub</Title>
+    <NeutralLanguage>en-AU</NeutralLanguage>
+    <AssemblyVersion>0.0.1</AssemblyVersion>
   </PropertyGroup>
-
-  <ItemGroup>
+	<ItemGroup>
     <ProjectReference Include="..\Host\ServiceDefaults\ACRViewer.ServiceDefaults.csproj" />
   </ItemGroup>
 

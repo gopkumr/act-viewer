@@ -2,6 +2,7 @@
 using ACRViewer.BlazorServer.Core.Utilities;
 using Microsoft.AspNetCore.Components;
 using MudBlazor;
+using static MudBlazor.CategoryTypes;
 
 namespace ACRViewer.BlazorServer.Components.Features.Navigation
 {
@@ -11,6 +12,10 @@ namespace ACRViewer.BlazorServer.Components.Features.Navigation
         [Inject] private IACRService? AcrManager { get; set; }
 
         [Inject] IMenuStateService? MenuState { get; set; }
+
+        private string _searchPhrase;
+
+        private MudTreeView<TreeViewItemViewModel> _treeView;
 
         protected override async Task OnInitializedAsync()
         {
@@ -85,6 +90,23 @@ namespace ACRViewer.BlazorServer.Components.Features.Navigation
                 Expanded = false,
                 Expandable = false,
             }).ToList();
+        }
+
+        private async void OnTextChanged(string searchPhrase)
+        {
+            _searchPhrase = searchPhrase;
+            await _treeView.FilterAsync();
+        }
+        private Task<bool> MatchesName(TreeItemData<TreeViewItemViewModel> item)
+        {
+            if (item?.Value?.Type == TreeViewType.Tag) return Task.FromResult(true);
+
+            if (string.IsNullOrEmpty(item?.Value?.Name))
+            {
+                return Task.FromResult(false);
+            }
+
+            return Task.FromResult(item.Value.Name.Contains(_searchPhrase, StringComparison.OrdinalIgnoreCase));
         }
     }
 }

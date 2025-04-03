@@ -38,23 +38,34 @@
         </MudPaper>
     </MudItem>
     <MudItem xs="12">
-        <MudPaper Elevation="25" Class="pa-4">
-            <MudCard Elevation="0">
-                <MudCardHeader>
-                    <CardHeaderContent>
-                        <MudText Typo="Typo.subtitle1" Class="mud-text-secondary mb-n1">Tag Manifest</MudText>
-                    </CardHeaderContent>
-                </MudCardHeader>
-                <MudCardContent Class="pa-0">
-                    <MudGrid>
-                        <MudItem xs="12">
-                            <pre>
-                            @(JsonSerializer.Serialize(@TagInstance?.Manifest, new JsonSerializerOptions() { WriteIndented = true }))
-                            </pre>
-                        </MudItem>
-                    </MudGrid>
-                </MudCardContent>
-            </MudCard>
+        <MudPaper Elevation="25" Class="d-flex flex-row pt-6 pb-4">
+            <MudIcon Icon="@Icons.Material.Filled.Analytics" Color="Color.Error" Class="mx-4" Style="width:54px; height:54px;"></MudIcon>
+            <div style="width:100%;">
+                <MudCard Elevation="0">
+                    <MudCardHeader>
+                        <CardHeaderContent>
+                            <MudText Typo="Typo.subtitle1" Class="mud-text-secondary mb-n1">Tag Manifest</MudText>
+                        </CardHeaderContent>
+                    </MudCardHeader>
+                    <MudCardContent Class="pa-0">
+                        <MudTabs Elevation="2" Rounded="true" ApplyEffectsToContainer="true" PanelClass="pa-6">
+                            <MudTabPanel Text="Manifest">
+                                <MudText xs="12">
+                                    <pre>
+                                        @(JsonSerializer.Serialize(@TagInstance?.Manifest, new JsonSerializerOptions() { WriteIndented = true }))
+                                </pre>
+                                </MudText>
+                            </MudTabPanel>
+                            <MudTabPanel Text="Guide">
+                                <MudText>Content Two</MudText>
+                            </MudTabPanel>
+                            <MudTabPanel Text="Code">
+                                <MudText>Content Three</MudText>
+                            </MudTabPanel>
+                        </MudTabs>
+                    </MudCardContent>
+                </MudCard>
+            </div>
         </MudPaper>
     </MudItem>
 </MudGrid>

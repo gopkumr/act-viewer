@@ -2,11 +2,8 @@
 
 @attribute [Authorize]
 
-<UserCard />
-<MudNavMenu>
-    <MudDivider Class="my-2" />
-</MudNavMenu>
-<MudTreeView T="TreeViewItemViewModel" ServerData="@LoadServerData" Items="@Repositories">
+<MudTextField T="string" Label="Search" Class="flex-grow-0 mt-2 ml-2" Adornment="Adornment.Start" AdornmentIcon="@Icons.Material.Filled.Search" TextChanged="OnTextChanged" Immediate="true" Clearable="true" />
+<MudTreeView T="TreeViewItemViewModel" @ref="_treeView" FilterFunc="MatchesName" ServerData="@LoadServerData" Items="@Repositories">
     <ItemTemplate>
         <MudTreeViewItem Value="@context.Value"
                          Text="@context.Value.Name"   
@@ -16,6 +13,7 @@
                          @bind-Expanded="@context.Expanded"
                          CanExpand="@context.Expandable"
                          Icon="@context.Icon"
+                         Visible="@context.Visible"
                          LoadingIconColor="Color.Info" />
     </ItemTemplate>
 </MudTreeView>
