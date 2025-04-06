@@ -13,6 +13,8 @@ namespace ACRViewer.BlazorServer.Components.Features.Navigation
 
         [Inject] IMenuStateService? MenuState { get; set; }
 
+        [Inject] private NavigationManager NavigationManager { get; set; }
+
         private string _searchPhrase;
 
         private MudTreeView<TreeViewItemViewModel> _treeView;
@@ -65,7 +67,20 @@ namespace ACRViewer.BlazorServer.Components.Features.Navigation
 
         public EventCallback HandleItemClick(TreeViewItemViewModel selectsValue)
         {
-            MenuState?.SetSelectedItem(selectsValue);
+            if (selectsValue != null)
+            {
+                switch (selectsValue.Type)
+                {
+                    case TreeViewType.Repository:
+                        NavigationManager.NavigateTo($"/repository?repositoryName={selectsValue.Name}", false);
+                        break;
+                    case TreeViewType.Tag:
+                        NavigationManager.NavigateTo($"/tag?repositoryName={selectsValue.ParentName}&tagName={selectsValue.Name}", false);
+                        break;
+                    default:
+                        break;
+                }
+            }
             return EventCallback.Factory.Create(this, () => { });
         }
 

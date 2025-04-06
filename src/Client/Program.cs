@@ -17,13 +17,27 @@ public class Program
                         .AddInteractiveServerComponents();
 
         builder.Services.AddAuthentication(OpenIdConnectDefaults.AuthenticationScheme)
-                        .AddMicrosoftIdentityWebApp(builder.Configuration.GetSection("AzureAd"))
+                        .AddMicrosoftIdentityWebApp(options =>
+                            {
+                                builder.Configuration.GetSection("AzureAd").Bind(options);
+                                options.Events.OnRedirectToIdentityProvider = context =>
+                                {
+                                    if (!context.Request.Path.StartsWithSegments("/MicrosoftIdentity/Account"))
+                                    {
+                                        // Redirect to custom login page instead of default
+                                        context.Response.Redirect("/login?returnUrl=" + Uri.EscapeDataString(context.Properties.RedirectUri ?? "/"));
+                                        context.HandleResponse(); // Prevent further processing
+                                        return Task.CompletedTask;
+                                    }
+                                    return Task.CompletedTask;
+                                };
+                            })
                         .EnableTokenAcquisitionToCallDownstreamApi()
                         .AddInMemoryTokenCaches();
 
         builder.Services.AddRazorPages();
         builder.Services.AddControllersWithViews()
-                       .AddMicrosoftIdentityUI();
+                        .AddMicrosoftIdentityUI();
 
         builder.Services.AddAuthorization();
 

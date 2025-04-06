@@ -30,9 +30,6 @@
     <Content Update="Components\Features\Navigation\NavMenu.razor">
       <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
     </Content>
-    <Content Update="Components\Features\User\RedirectToLogin.razor">
-      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
-    </Content>
   </ItemGroup>
 
 	<ItemGroup>

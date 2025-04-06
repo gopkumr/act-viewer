@@ -1,18 +1,46 @@
-﻿@inject NavigationManager Navigation
+﻿@page "/login"
+@inject NavigationManager Navigation
+@inject AuthenticationStateProvider AuthStateProvider
 
-<AuthorizeView>
-    <Authorized>
-        Hello, @context.User.Identity?.Name!
-        <button class="nav-link btn btn-link" @onclick="BeginLogOut">Log out</button>
-    </Authorized>
-    <NotAuthorized>
-        <a href="authentication/login">Log in</a>
-    </NotAuthorized>
-</AuthorizeView>
+<MudContainer MaxWidth="MaxWidth.Small" Class="d-flex flex-column align-center justify-center">
+    <MudCard Elevation="5" Class="pa-6" Style="width: 100%; max-width: 400px;">
+        <MudCardContent>
+            <MudText Typo="Typo.h5" Align="Align.Center" GutterBottom="true">
+                Welcome
+            </MudText>
+            <MudText Typo="Typo.body1" Align="Align.Center" Color="Color.Secondary" GutterBottom="true">
+                @if (isAuthenticated)
+                {
+                    <span>You are signed in as @userName</span>
+                }
+                else
+                {
+                    <span>Sign in to access your account</span>
+                }
+            </MudText>
 
-@code{
-    public void BeginLogOut()
-    {
-        Navigation.NavigateTo("authentication/logout");
-    }
-}
+            <AuthorizeView>
+                <Authorized>
+                    <MudButton Variant="Variant.Filled"
+                               Color="Color.Primary"
+                               Size="Size.Large"
+                               FullWidth="true"
+                               StartIcon="@Icons.Material.Filled.Logout"
+                               OnClick="Logout">
+                        Logout
+                    </MudButton>
+                </Authorized>
+                <NotAuthorized>
+                    <MudButton Variant="Variant.Filled"
+                               Color="Color.Primary"
+                               Size="Size.Large"
+                               FullWidth="true"
+                               StartIcon="@Icons.Material.Filled.Login"
+                               OnClick="SignIn">
+                        Sign in with Microsoft
+                    </MudButton>
+                </NotAuthorized>
+            </AuthorizeView>
+        </MudCardContent>
+    </MudCard>
+</MudContainer>

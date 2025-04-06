@@ -1,6 +1,5 @@
 ﻿using ACRViewer.BlazorServer.Core.Interface;
 using Microsoft.AspNetCore.Components;
-using Microsoft.Identity.Web;
 
 namespace ACRViewer.BlazorServer.Components.Features.User
 {
@@ -23,20 +22,13 @@ namespace ACRViewer.BlazorServer.Components.Features.User
                 throw new InvalidOperationException("Authentication Manager not injected");
             }
 
-            try
+            var user = await AuthenticationManager.GetAuthenticatedUser() ?? throw new InvalidOperationException("User not authenticated");
+            Email = user.Email;
+            FirstName = user.FirstName;
+            SecondName = user.LastName;
+            if (FirstName.Length > 0)
             {
-                var user = await AuthenticationManager.GetAuthenticatedUser() ?? throw new InvalidOperationException("User not authenticated");
-                Email = user.Email;
-                FirstName = user.FirstName;
-                SecondName = user.LastName;
-                if (FirstName.Length > 0)
-                {
-                    FirstLetterOfName = FirstName[0];
-                }
-            }
-            catch (MicrosoftIdentityWebChallengeUserException)
-            {
-                NavigationManager.NavigateTo("/MicrosoftIdentity/Account/SignIn", forceLoad: true);
+                FirstLetterOfName = FirstName[0];
             }
         }
     }

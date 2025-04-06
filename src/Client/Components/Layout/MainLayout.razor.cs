@@ -1,7 +1,4 @@
-﻿using ACRViewer.BlazorServer.Core.Interface;
-using ACRViewer.BlazorServer.Core.Utilities;
-using Microsoft.AspNetCore.Components;
-using Microsoft.Identity.Web;
+﻿using ACRViewer.BlazorServer.Core.Utilities;
 using MudBlazor;
 
 namespace ACRViewer.BlazorServer.Components.Layout
@@ -10,7 +7,7 @@ namespace ACRViewer.BlazorServer.Components.Layout
     {
         private MudTheme CurrentTheme { get; set; } = BlazorTheme.DefaultTheme;
 
-        private bool _drawerOpen=true;
+        private bool _drawerOpen = true;
 
     }
 }

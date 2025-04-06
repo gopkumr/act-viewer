@@ -6,9 +6,11 @@ namespace ACRViewer.BlazorServer.Components.Features.Tag
     public partial class Tag
     {
         [Parameter]
+        [SupplyParameterFromQuery(Name = "tagName")]
         public string? TagName { get; set; }
 
         [Parameter]
+        [SupplyParameterFromQuery(Name = "repositoryName")]
         public string? RepositoryName { get; set; }
 
         [Inject] private IACRService? ACRService { get; set; }

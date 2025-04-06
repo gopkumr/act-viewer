@@ -2,8 +2,8 @@
 
 @page "/"
 @attribute [Authorize]
-@using System.Security.Claims
 
+@using System.Security.Claims
 
 <HeroTitle Title="Module Details" Description="Azure bicep registry module details." />
 
@@ -13,7 +13,7 @@
 }
 else
 {
-    if (SelectedItem != null)
+   @*  if (SelectedItem != null)
     {
         switch (SelectedItem.Type)
         {
@@ -29,8 +29,8 @@ else
         }
     }
     else
-    {
+    { *@
         <MudText Typo="Typo.h6">Select an item to view details.</MudText>
-    }
+    @* } *@
 
 }
