@@ -1,5 +1,6 @@
 using ACRViewer.BlazorServer.Components;
 using ACRViewer.BlazorServer.Core.Utilities;
+using ACRViewer.BlazorServer.Infrastructure;
 using Microsoft.AspNetCore.Authentication.OpenIdConnect;
 using Microsoft.Identity.Web;
 using Microsoft.Identity.Web.UI;
@@ -44,6 +45,9 @@ public class Program
         builder.Services.AddHttpContextAccessor();
 
         builder.AddClientServices();
+
+        builder.Services.AddInfrastructureServices();
+        builder.Services.AddFeatureServices();
 
         var app = builder.Build();
 

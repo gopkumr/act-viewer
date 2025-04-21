@@ -1,4 +1,4 @@
-﻿using ACRViewer.BlazorServer.Core.Interface;
+﻿using ACRViewer.BlazorServer.Features.Tag.Services;
 using Microsoft.AspNetCore.Components;
 
 namespace ACRViewer.BlazorServer.Components.Features.Tag
@@ -13,15 +13,15 @@ namespace ACRViewer.BlazorServer.Components.Features.Tag
         [SupplyParameterFromQuery(Name = "repositoryName")]
         public string? RepositoryName { get; set; }
 
-        [Inject] private IACRService? ACRService { get; set; }
+        [Inject] private ITagService? TagService { get; set; }
 
         private Core.Models.Tag? TagInstance { get; set; }
 
         protected override async Task OnParametersSetAsync()
         {
-            if (ACRService != null && TagName != null && RepositoryName != null)
+            if (TagService != null && TagName != null && RepositoryName != null)
             {
-                TagInstance = await ACRService.GetTagPropertiesAsync(RepositoryName, TagName);
+                TagInstance = await TagService.GetTag(RepositoryName, TagName);
                 StateHasChanged();
             }
         }

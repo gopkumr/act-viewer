@@ -5,7 +5,7 @@ using MudBlazor.Services;
 
 namespace ACRViewer.BlazorServer.Core.Utilities
 {
-    public static class ServerExtensions
+    public static class InfrastructureExtensions
     {
         public static WebApplicationBuilder AddClientServices(this WebApplicationBuilder builder)
         {
@@ -26,14 +26,8 @@ namespace ACRViewer.BlazorServer.Core.Utilities
                     configuration.SnackbarConfiguration.VisibleStateDuration = 3000;
                     configuration.SnackbarConfiguration.ShowCloseIcon = false;
                 })
-            .AddScoped<ITokenService, TokenService>()
-            .AddScoped<IAuthenticationManager, AuthenticationManager>()
             .AddScoped<IMenuStateService, MenuStateService>()
             .AddSingleton(settings)
-            .AddHttpClient<IACRService, ACRService>(client =>
-              {
-                  client.BaseAddress = new Uri(settings.BaseUrl);
-              })
             ;
 
             return builder;

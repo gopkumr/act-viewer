@@ -33,9 +33,6 @@
   </ItemGroup>
 
 	<ItemGroup>
-	  <Folder Include="Features\Navigation\" />
-	  <Folder Include="Features\Tag\" />
-	  <Folder Include="Features\Repository\" />
 	  <Folder Include="Features\User\" />
 	</ItemGroup>
 

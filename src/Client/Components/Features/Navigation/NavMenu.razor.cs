@@ -1,17 +1,15 @@
 ﻿using ACRViewer.BlazorServer.Core.Interface;
 using ACRViewer.BlazorServer.Core.Utilities;
+using ACRViewer.BlazorServer.Features.Navigation.Services;
 using Microsoft.AspNetCore.Components;
 using MudBlazor;
-using static MudBlazor.CategoryTypes;
 
 namespace ACRViewer.BlazorServer.Components.Features.Navigation
 {
     public partial class NavMenu
     {
         private List<TreeItemData<TreeViewItemViewModel>> Repositories { get; set; } = [];
-        [Inject] private IACRService? AcrManager { get; set; }
-
-        [Inject] IMenuStateService? MenuState { get; set; }
+        [Inject] private INavigationService? NavigationService{ get; set; }
 
         [Inject] private NavigationManager NavigationManager { get; set; }
 
@@ -33,17 +31,17 @@ namespace ACRViewer.BlazorServer.Components.Features.Navigation
 
         private async Task LoadRepositories()
         {
-            if (AcrManager == null)
+            if (NavigationService == null)
             {
                 throw new InvalidOperationException("ACR Manager not injected");
             }
 
-            var repositories = await AcrManager.GetAllRepositories() ?? [];
-            var acrName = AcrManager.GetACRName() ?? "No ACR Configured";
+            var repositories = await NavigationService.GetRepositoryNames() ?? [];
+            var acrName = NavigationService.GetRepositoryName() ?? "No ACR Configured";
 
             var respositories = repositories.Select(r => new TreeItemData<TreeViewItemViewModel>
             {
-                Value = new TreeViewItemViewModel(TreeViewType.Repository, r.Name, acrName),
+                Value = new TreeViewItemViewModel(TreeViewType.Repository, r, acrName),
                 Icon = Icons.Material.Filled.Folder,
                 Expanded = false,
             }).ToList();
@@ -93,14 +91,14 @@ namespace ACRViewer.BlazorServer.Components.Features.Navigation
 
         private async Task<IReadOnlyCollection<TreeItemData<TreeViewItemViewModel>>> LoadTags(string repository)
         {
-            if (AcrManager == null)
+            if (NavigationService == null)
             {
                 throw new InvalidOperationException("ACR Manager not injected");
             }
-            var tags = await AcrManager.GetTags(repository) ?? [];
+            var tags = await NavigationService.GetTagNames(repository) ?? [];
             return tags.Select(t => new TreeItemData<TreeViewItemViewModel>
             {
-                Value = new TreeViewItemViewModel(TreeViewType.Tag, t.Name, repository, false),
+                Value = new TreeViewItemViewModel(TreeViewType.Tag, t, repository, false),
                 Icon = Icons.Material.Filled.Label,
                 Expanded = false,
                 Expandable = false,

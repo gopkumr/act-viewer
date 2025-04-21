@@ -1,4 +1,4 @@
-﻿using ACRViewer.BlazorServer.Core.Interface;
+﻿using ACRViewer.BlazorServer.Features.Repository.Services;
 using Microsoft.AspNetCore.Components;
 
 namespace ACRViewer.BlazorServer.Components.Features.Repository
@@ -9,15 +9,15 @@ namespace ACRViewer.BlazorServer.Components.Features.Repository
         [SupplyParameterFromQuery(Name = "repositoryName")]
         public string? RepositoryName { get; set; }
 
-        [Inject] private IACRService? ACRService { get; set; }
+        [Inject] private IRepositoryService? RepositoryService { get; set; }
 
         private Core.Models.Repository? RepositoryInstance { get; set; }
 
         protected override async Task OnParametersSetAsync()
         {
-            if (ACRService != null && RepositoryName != null)
+            if (RepositoryService != null && RepositoryName != null)
             {
-                RepositoryInstance = await ACRService.GetRepositoryPropertiesAsync(RepositoryName);
+                RepositoryInstance = await RepositoryService.GetRepository(RepositoryName);
                 StateHasChanged();
             }
 
