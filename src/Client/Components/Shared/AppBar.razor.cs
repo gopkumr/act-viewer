@@ -3,7 +3,9 @@ using ACRViewer.BlazorServer.Core.Utilities;
 using Microsoft.AspNetCore.Components;
 using Microsoft.Identity.Web;
 using MudBlazor;
+using System.Diagnostics.Contracts;
 using System.Reflection.Metadata;
+using System.Runtime.CompilerServices;
 
 namespace ACRViewer.BlazorServer.Components.Shared
 {
@@ -19,6 +21,12 @@ namespace ACRViewer.BlazorServer.Components.Shared
 
         [Parameter]
         public EventCallback<MudTheme> CurrentThemeChanged { get; set; }
+
+        [Parameter]
+        public bool IsDrawOpen { get; set; } = true;
+
+        [Parameter]
+        public EventCallback<bool> IsDrawOpenChanged { get; set; }
 
         private string AssemblyVersion { get; set; }
 
@@ -71,6 +79,12 @@ namespace ACRViewer.BlazorServer.Components.Shared
             _isDarkMode = !_isDarkMode;
 
             await CurrentThemeChanged.InvokeAsync(CurrentTheme);
+        }
+
+        private async Task ToggerDraw()
+        {
+            IsDrawOpen = !IsDrawOpen;
+            await IsDrawOpenChanged.InvokeAsync(IsDrawOpen);
         }
     }
 }
