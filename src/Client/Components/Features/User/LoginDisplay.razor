@@ -1,0 +1,50 @@
+﻿@page "/login"
+@inject NavigationManager Navigation
+@inject AuthenticationStateProvider AuthStateProvider
+
+<MudContainer MaxWidth="MaxWidth.False" Class="mt-16 px-8">
+    <MudGrid>
+        <MudItem xs="12" sm="6" Class="d-flex align-center justify-center">
+            <MudCard Elevation="5" Class="pa-6" Style="width: 100%; max-width: 400px;">
+                <MudCardContent>
+                    <MudText Typo="Typo.h5" Align="Align.Center" GutterBottom="true">
+                        Welcome
+                    </MudText>
+                    <MudText Typo="Typo.body1" Align="Align.Center" Color="Color.Secondary" GutterBottom="true">
+                        @if (isAuthenticated)
+                        {
+                            <span>You are signed in as @userName</span>
+                        }
+                        else
+                        {
+                            <span>Sign in to access your account</span>
+                        }
+                    </MudText>
+
+                    <AuthorizeView>
+                        <Authorized>
+                            <MudButton Variant="Variant.Filled"
+                                       Color="Color.Primary"
+                                       Size="Size.Large"
+                                       FullWidth="true"
+                                       StartIcon="@Icons.Material.Filled.Logout"
+                                       OnClick="Logout">
+                                Logout
+                            </MudButton>
+                        </Authorized>
+                        <NotAuthorized>
+                            <MudButton Variant="Variant.Filled"
+                                       Color="Color.Primary"
+                                       Size="Size.Large"
+                                       FullWidth="true"
+                                       StartIcon="@Icons.Material.Filled.Login"
+                                       OnClick="SignIn">
+                                Sign in with Microsoft
+                            </MudButton>
+                        </NotAuthorized>
+                    </AuthorizeView>
+                </MudCardContent>
+            </MudCard>
+        </MudItem>
+    </MudGrid>
+</MudContainer>

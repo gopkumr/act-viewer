@@ -1,5 +1,6 @@
 using ACRViewer.BlazorServer.Components;
-using ACRViewer.BlazorServer.Extensions;
+using ACRViewer.BlazorServer.Core.Utilities;
+using ACRViewer.BlazorServer.Infrastructure;
 using Microsoft.AspNetCore.Authentication.OpenIdConnect;
 using Microsoft.Identity.Web;
 using Microsoft.Identity.Web.UI;
@@ -17,19 +18,36 @@ public class Program
                         .AddInteractiveServerComponents();
 
         builder.Services.AddAuthentication(OpenIdConnectDefaults.AuthenticationScheme)
-                        .AddMicrosoftIdentityWebApp(builder.Configuration.GetSection("AzureAd"))
+                        .AddMicrosoftIdentityWebApp(options =>
+                            {
+                                builder.Configuration.GetSection("AzureAd").Bind(options);
+                                options.Events.OnRedirectToIdentityProvider = context =>
+                                {
+                                    if (!context.Request.Path.StartsWithSegments("/MicrosoftIdentity/Account"))
+                                    {
+                                        // Redirect to custom login page instead of default
+                                        context.Response.Redirect("/login?returnUrl=" + Uri.EscapeDataString(context.Properties.RedirectUri ?? "/"));
+                                        context.HandleResponse(); // Prevent further processing
+                                        return Task.CompletedTask;
+                                    }
+                                    return Task.CompletedTask;
+                                };
+                            })
                         .EnableTokenAcquisitionToCallDownstreamApi()
                         .AddInMemoryTokenCaches();
 
         builder.Services.AddRazorPages();
         builder.Services.AddControllersWithViews()
-                       .AddMicrosoftIdentityUI();
+                        .AddMicrosoftIdentityUI();
 
         builder.Services.AddAuthorization();
 
         builder.Services.AddHttpContextAccessor();
 
         builder.AddClientServices();
+
+        builder.Services.AddInfrastructureServices();
+        builder.Services.AddFeatureServices();
 
         var app = builder.Build();
 
@@ -43,7 +61,7 @@ public class Program
 
         app.UseHttpsRedirection();
 
-        app.MapStaticAssets(); 
+        app.MapStaticAssets();
         app.UseRouting();
 
         app.UseAuthentication();
@@ -53,7 +71,7 @@ public class Program
 
         app.MapControllers(); // Required for MicrosoftIdentity controllers
         app.MapRazorPages();  // Required for MicrosoftIdentity Razor pages
-        
+
         app.MapRazorComponents<App>()
             .AddInteractiveServerRenderMode();
 
