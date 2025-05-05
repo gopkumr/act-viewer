@@ -1,36 +1,35 @@
 ﻿@page "/tag"
 @using System.Text.Json
 
+<MudText Typo="Typo.caption" Style="color: #333; font-weight: 500;">
+    Azure bicep registry module details
+</MudText>
 <MudGrid>
     <MudItem xs="12">
-        <MudPaper Elevation="25" Class="d-flex flex-row pt-6 pb-4">
-            <MudIcon Icon="@Icons.Material.Filled.Assignment" Color="Color.Error" Class="mx-4" Style="width:54px; height:54px;"></MudIcon>
-            <div>
+        <MudPaper Elevation="25" Class="d-flex flex-row">
+            <div class="w-100">
                 <MudCard Elevation="0">
                     <MudCardHeader>
                         <CardHeaderContent>
-                            <MudText Typo="Typo.subtitle1" Class="mud-text-secondary mb-n1">Tag Attributes</MudText>
+                            <MudText Typo="Typo.h6">
+                                <MudIcon Icon="@Icons.Material.Outlined.Assignment" Style="color: #4A90E2;" />
+                                Tag Attributes
+                            </MudText>
                         </CardHeaderContent>
                     </MudCardHeader>
-                    <MudCardContent Class="pa-0">
+                    <MudCardContent Class="pl-10">
                         <MudGrid>
                             <MudItem xs="6">
-                                <MudTextField Label="Name" Value="@TagInstance?.Name" ReadOnly="true" />
+                                <MudTextField Label="Name" Class="mt-2" Value="@TagInstance?.Name" ReadOnly="true" />
+                                <MudTextField Label="Created On" Class="mt-2" Value="@TagInstance?.CreationDate" ReadOnly="true" />
+                                <MudTextField Label="Platform" Class="mt-2" Value="@TagInstance?.Platform" ReadOnly="true" />
                             </MudItem>
                             <MudItem xs="6">
-                                <MudTextField Label="Digest" Value="@TagInstance?.Digest" ReadOnly="true" />
-                            </MudItem>
-                            <MudItem xs="6">
-                                <MudTextField Label="Updated On" Value="@TagInstance?.ModifiedDate" ReadOnly="true" />
-                            </MudItem>
-                            <MudItem xs="6">
-                                <MudTextField Label="Created On" Value="@TagInstance?.CreationDate" ReadOnly="true" />
-                            </MudItem>
-                            <MudItem xs="6">
-                                <MudTextField Label="Platform" Value="@TagInstance?.Platform" ReadOnly="true" />
-                            </MudItem>
-                            <MudItem xs="6">
-                                <MudTextField Label="Size (bytes)" Value="@TagInstance?.SizeInBytes" ReadOnly="true" />
+                                <MudTextField Label="Digest" Class="mt-2" Value="@TagInstance?.Digest" ReadOnly="true" />
+                                <MudTextField Label="Updated On" Class="mt-2" Value="@TagInstance?.ModifiedDate" ReadOnly="true" />
+                                <MudButton Variant="Variant.Filled" Color="Color.Primary" StartIcon="@Icons.Material.Filled.Download" Class="mt-2">
+                                    Download
+                                </MudButton>
                             </MudItem>
                         </MudGrid>
                     </MudCardContent>
@@ -39,15 +38,9 @@
         </MudPaper>
     </MudItem>
     <MudItem xs="12">
-        <MudPaper Elevation="25" Class="d-flex flex-row pt-6 pb-4">
-            <MudIcon Icon="@Icons.Material.Filled.Analytics" Color="Color.Error" Class="mx-4" Style="width:54px; height:54px;"></MudIcon>
+        <MudPaper Elevation="25" Class="d-flex flex-row">
             <div style="width:100%;">
                 <MudCard Elevation="0">
-                    <MudCardHeader>
-                        <CardHeaderContent>
-                            <MudText Typo="Typo.subtitle1" Class="mud-text-secondary mb-n1">Tag Manifest</MudText>
-                        </CardHeaderContent>
-                    </MudCardHeader>
                     <MudCardContent Class="pa-0">
                         <MudTabs Elevation="2" Rounded="true" ApplyEffectsToContainer="true" PanelClass="pa-6">
                             <MudTabPanel Text="Manifest">

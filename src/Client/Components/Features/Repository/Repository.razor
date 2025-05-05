@@ -8,7 +8,7 @@
 <MudGrid>
     <MudItem xs="12">
         <MudPaper Elevation="25" Class="d-flex flex-row">
-            <div>
+            <div class="w-100">
                 <MudCard Elevation="0">
                     <MudCardHeader>
                         <CardHeaderContent>
@@ -21,22 +21,14 @@
                     <MudCardContent Class="pl-10">
                         <MudGrid>
                             <MudItem xs="6">
-                                <MudTextField Label="Name" Value="@RepositoryInstance?.Name" ReadOnly="true" />
+                                <MudTextField Label="Name" Class="mt-2" Value="@RepositoryInstance?.Name" ReadOnly="true" />
+                                <MudTextField Label="Created On" Class="mt-2" Value="@RepositoryInstance?.CreatedDate" ReadOnly="true" />
+                                <MudTextField Label="Manifest Count" Class="mt-2" Value="@RepositoryInstance?.ManifestCount" ReadOnly="true" />
                             </MudItem>
                             <MudItem xs="6">
-                                <MudTextField Label="Registry Login Server" Value="@RepositoryInstance?.RegistryLoginServer" ReadOnly="true" />
-                            </MudItem>
-                            <MudItem xs="6">
-                                <MudTextField Label="Updated On" Value="@RepositoryInstance?.ModifiedDate" ReadOnly="true" />
-                            </MudItem>
-                            <MudItem xs="6">
-                                <MudTextField Label="Created On" Value="@RepositoryInstance?.CreatedDate" ReadOnly="true" />
-                            </MudItem>
-                            <MudItem xs="6">
-                                <MudTextField Label="Manifest Count" Value="@RepositoryInstance?.ManifestCount" ReadOnly="true" />
-                            </MudItem>
-                            <MudItem xs="6">
-                                <MudTextField Label="Tag Count" Value="@RepositoryInstance?.TagCount" ReadOnly="true" />
+                                <MudTextField Label="Registry Login Server" Class="mt-2" Value="@RepositoryInstance?.RegistryLoginServer" ReadOnly="true" />
+                                <MudTextField Label="Updated On" Class="mt-2" Value="@RepositoryInstance?.ModifiedDate" ReadOnly="true" />
+                                <MudTextField Label="Tag Count" Class="mt-2" Value="@RepositoryInstance?.TagCount" ReadOnly="true" />
                             </MudItem>
                         </MudGrid>
                     </MudCardContent>
