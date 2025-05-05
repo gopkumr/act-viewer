@@ -10,14 +10,17 @@ namespace ACRViewer.BlazorServer.Infrastructure
     public class ContainerRegistryClientService(ACRSettings acrSettings, IAuthenticationManager authenticationManager) : IContainerRegistryClientService
     {
         private ContainerRegistryClient? _client;
+        private ContainerRegistryContentClient? _contentClient;
         private User? _user;
 
-        private async Task InitialiseClient()
+        private async Task InitialiseClient(string? repositoryName = null)
         {
-            if (_client == null)
+            _user ??= await authenticationManager.GetAuthenticatedUser() ?? throw new InvalidOperationException("User not authenticated");
+            _client ??= new(new Uri(acrSettings.BaseUrl), _user.AzureAccessTokenCredential);
+
+            if (repositoryName != null && (_contentClient == null || !_contentClient.RepositoryName.Equals(repositoryName, StringComparison.InvariantCultureIgnoreCase)))
             {
-                _user = await authenticationManager.GetAuthenticatedUser() ?? throw new InvalidOperationException("User not authenticated");
-                _client = new(new Uri(acrSettings.BaseUrl), _user.AzureAccessTokenCredential);
+                _contentClient = new(new Uri(acrSettings.BaseUrl), repositoryName, _user.AzureAccessTokenCredential);
             }
         }
 
@@ -31,7 +34,7 @@ namespace ACRViewer.BlazorServer.Infrastructure
         {
             await InitialiseClient();
             List<Repository> response = [];
-            AsyncPageable<string> repositories = _client.GetRepositoryNamesAsync();
+            AsyncPageable<string> repositories = _client!.GetRepositoryNamesAsync();
 
             await foreach (string repository in repositories)
             {
@@ -44,7 +47,7 @@ namespace ACRViewer.BlazorServer.Infrastructure
         public async Task<Repository> GetRepository(string repositoryName)
         {
             await InitialiseClient();
-            var repositoryInstance = _client.GetRepository(repositoryName);
+            var repositoryInstance = _client!.GetRepository(repositoryName);
             var repositoryProperties = await repositoryInstance.GetPropertiesAsync();
 
             return new Repository
@@ -60,11 +63,12 @@ namespace ACRViewer.BlazorServer.Infrastructure
 
         public async Task<Tag> GetTag(string repositoryName, string tagNameOfDigest)
         {
-            await InitialiseClient();
-            var artifact = _client.GetArtifact(repositoryName, tagNameOfDigest);
+            await InitialiseClient(repositoryName);
+            var artifact = _client!.GetArtifact(repositoryName, tagNameOfDigest);
             var tagProperties = await artifact.GetTagPropertiesAsync(tagNameOfDigest);
             var manifestProperties = await artifact.GetManifestPropertiesAsync();
-            var response = JsonNode.Parse(manifestProperties.GetRawResponse().Content.ToString());
+            var manifestValue = await _contentClient!.GetManifestAsync(tagNameOfDigest);
+            var response = JsonNode.Parse(manifestValue.Value.Manifest.ToString());
 
             return new Tag
             {
@@ -83,7 +87,7 @@ namespace ACRViewer.BlazorServer.Infrastructure
             await InitialiseClient();
 
             List<Tag> response = [];
-            var artifactManifestProperties = _client.GetRepository(repositoryName).GetAllManifestPropertiesAsync(ArtifactManifestOrder.LastUpdatedOnDescending);
+            var artifactManifestProperties = _client!.GetRepository(repositoryName).GetAllManifestPropertiesAsync(ArtifactManifestOrder.LastUpdatedOnDescending);
             await foreach (var property in artifactManifestProperties)
             {
                 foreach (var tag in property.Tags)
