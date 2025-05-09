@@ -12,5 +12,7 @@ namespace ACRViewer.BlazorServer.Core.Interface
         public Task<IEnumerable<Tag>> GetTags(string repositoryName);
 
         public Task<Tag> GetTag(string repositoryName, string tagNameOfDigest);
+
+        Task<string> GetTagSource(string repositoryName, string tagNameOfDigest);
     }
 }

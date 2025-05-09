@@ -3,11 +3,18 @@ using ACRViewer.BlazorServer.Core.Models;
 using ACRViewer.BlazorServer.Core.Utilities;
 using Azure;
 using Azure.Containers.ContainerRegistry;
+using SharpCompress.Archives.Tar;
+using SharpCompress.Compressors.Deflate;
+using System;
+using System.IO.Compression;
+using System.Net.Http;
+using System.Text;
 using System.Text.Json.Nodes;
 
 namespace ACRViewer.BlazorServer.Infrastructure
 {
-    public class ContainerRegistryClientService(ACRSettings acrSettings, IAuthenticationManager authenticationManager) : IContainerRegistryClientService
+    public class ContainerRegistryClientService(ACRSettings acrSettings, IAuthenticationManager authenticationManager, HttpClient httpClient)
+        : IContainerRegistryClientService
     {
         private ContainerRegistryClient? _client;
         private ContainerRegistryContentClient? _contentClient;
@@ -78,7 +85,9 @@ namespace ACRViewer.BlazorServer.Infrastructure
                 ModifiedDate = tagProperties.Value.LastUpdatedOn,
                 Platform = $"{manifestProperties.Value.OperatingSystem?.ToString() ?? "NA"}/{manifestProperties.Value.Architecture?.ToString() ?? "NA"}",
                 SizeInBytes = manifestProperties.Value.SizeInBytes,
-                Manifest = response
+                Manifest = response,
+                Source = await GetTagSource(repositoryName, tagNameOfDigest),
+                Documentation = await GetTagDocumentation(repositoryName, tagNameOfDigest)
             };
         }
 
@@ -99,11 +108,65 @@ namespace ACRViewer.BlazorServer.Infrastructure
                         CreationDate = property.CreatedOn,
                         ModifiedDate = property.LastUpdatedOn,
                         Platform = $"{property.OperatingSystem?.ToString() ?? "NA"}/{property.Architecture?.ToString() ?? "NA"}",
+
                     });
                 }
             }
             return response;
         }
 
+        public async Task<string> GetTagSource(string repositoryName, string tagNameOfDigest)
+        {
+            string? sourceFile = null;
+            await InitialiseClient(repositoryName);
+            var artifact = _client!.GetArtifact(repositoryName, tagNameOfDigest);
+            GetManifestResult result = await _contentClient!.GetManifestAsync(tagNameOfDigest);
+            OciImageManifest? manifest = result?.Manifest?.ToObjectFromJson<OciImageManifest>();
+            if (manifest != null)
+            {
+                var sourceLayers = manifest.Layers.Where(q => q.Annotations != null && q.Annotations.Title.Equals("source files", StringComparison.OrdinalIgnoreCase))
+                                                  .ToList();
+                foreach (OciDescriptor layerInfo in sourceLayers)
+                {
+                    using var layerStream = new MemoryStream();
+                    await _contentClient.DownloadBlobToAsync(layerInfo.Digest, layerStream);
+                    layerStream.Position = 0;
+                    using var gzipStream = new System.IO.Compression.GZipStream(layerStream, CompressionMode.Decompress);
+                    using var decompressedStream = new MemoryStream();
+                    await gzipStream.CopyToAsync(decompressedStream);
+                    decompressedStream.Position = 0;
+                    using var tarArchive = TarArchive.Open(decompressedStream);
+                    foreach (var entry in tarArchive.Entries)
+                    {
+                        if (Path.GetExtension(entry.Key ?? "").Equals(".bicep", StringComparison.OrdinalIgnoreCase))
+                        {
+                            using var entryStream = entry.OpenEntryStream();
+                            using var entryMemoryStream = new MemoryStream();
+                            await entryStream.CopyToAsync(entryMemoryStream);
+                            entryMemoryStream.Position = 0;
+                            using var reader = new StreamReader(entryMemoryStream, Encoding.UTF8);
+                            sourceFile = (sourceFile ?? "") + await reader.ReadToEndAsync();
+                        }
+                    }
+                }
+            }
+            return sourceFile ?? "No source attached with the module";
+        }
+
+        private async Task<string> GetTagDocumentation(string repositoryName, string tagNameOfDigest)
+        {
+            await InitialiseClient(repositoryName);
+            GetManifestResult result = await _contentClient!.GetManifestAsync(tagNameOfDigest);
+            OciImageManifest? manifest = result?.Manifest?.ToObjectFromJson<OciImageManifest>();
+            if (manifest != null && manifest.Annotations!=null && manifest.Annotations.Documentation!=null)
+            {
+                var response = await httpClient.GetAsync(manifest.Annotations.Documentation, HttpCompletionOption.ResponseHeadersRead);
+                if (response.IsSuccessStatusCode)
+                {
+                    return await response.Content.ReadAsStringAsync();
+                }
+            }
+            return "No accessible documentaion provided";
+        }
     }
 }

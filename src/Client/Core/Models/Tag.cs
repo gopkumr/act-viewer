@@ -12,5 +12,7 @@ namespace ACRViewer.BlazorServer.Core.Models
         public long? SizeInBytes { get; set; }
         public JsonNode? Manifest { get; set; }
         public string DocketCommand { get; set; }
+        public string Source { get; set; }
+        public string Documentation { get; set; }
     }
 }

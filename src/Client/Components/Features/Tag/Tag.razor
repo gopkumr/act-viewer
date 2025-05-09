@@ -27,7 +27,7 @@
                             <MudItem xs="6">
                                 <MudTextField Label="Digest" Class="mt-2" Value="@TagInstance?.Digest" ReadOnly="true" />
                                 <MudTextField Label="Updated On" Class="mt-2" Value="@TagInstance?.ModifiedDate" ReadOnly="true" />
-                                <MudButton Variant="Variant.Filled" Color="Color.Primary" StartIcon="@Icons.Material.Filled.Download" Class="mt-2">
+                                <MudButton Variant="Variant.Filled" Color="Color.Primary" StartIcon="@Icons.Material.Filled.Download" @onclick="()=>DownloadSource()" Class="mt-2">
                                     Download
                                 </MudButton>
                             </MudItem>
@@ -47,14 +47,22 @@
                                 <MudText xs="12">
                                     <pre>
                                         @(JsonSerializer.Serialize(@TagInstance?.Manifest, new JsonSerializerOptions() { WriteIndented = true }))
-                                </pre>
+                                    </pre>
                                 </MudText>
                             </MudTabPanel>
                             <MudTabPanel Text="Guide">
-                                <MudText>Content Two</MudText>
+                                <MudText>
+                                    <pre>
+                                        @TagInstance?.Documentation
+                                    </pre>
+                                </MudText>
                             </MudTabPanel>
                             <MudTabPanel Text="Code">
-                                <MudText>Content Three</MudText>
+                                <MudText>
+                                    <pre>
+                                        @TagInstance?.Source
+                                    </pre>
+                                </MudText>
                             </MudTabPanel>
                         </MudTabs>
                     </MudCardContent>
