@@ -1,55 +1,46 @@
 ﻿@page "/repository"
 
 @using System.Text.Json
+
+<MudText Typo="Typo.caption" Style="color: #333; font-weight: 500;">
+    Azure bicep registry module details
+</MudText>
 <MudGrid>
     <MudItem xs="12">
-        <MudPaper Elevation="25" Class="d-flex flex-row pt-6 pb-4">
-            <MudIcon Icon="@Icons.Material.Filled.Assignment" Color="Color.Error" Class="mx-4" Style="width:54px; height:54px;"></MudIcon>
-            <div>
+        <MudPaper Elevation="25" Class="d-flex flex-row">
+            <div class="w-100">
                 <MudCard Elevation="0">
                     <MudCardHeader>
                         <CardHeaderContent>
-                            <MudText Typo="Typo.subtitle1" Class="mud-text-secondary mb-n1">Repository Attributes</MudText>
+                            <MudText Typo="Typo.h6">
+                                <MudIcon Icon="@Icons.Material.Outlined.Assignment" Style="color: #4A90E2;" />
+                                Repository Attributes
+                            </MudText>
                         </CardHeaderContent>
                     </MudCardHeader>
-                    <MudCardContent Class="pa-0">
+                    <MudCardContent Class="pl-10">
                         <MudGrid>
                             <MudItem xs="6">
-                                <MudTextField Label="Name" Value="@RepositoryInstance?.Name" ReadOnly="true" />
+                                <MudTextField Label="Name" Class="mt-2" Value="@RepositoryInstance?.Name" ReadOnly="true" />
+                                <MudTextField Label="Created On" Class="mt-2" Value="@RepositoryInstance?.CreatedDate" ReadOnly="true" />
+                                <MudTextField Label="Manifest Count" Class="mt-2" Value="@RepositoryInstance?.ManifestCount" ReadOnly="true" />
                             </MudItem>
                             <MudItem xs="6">
-                                <MudTextField Label="Registry Login Server" Value="@RepositoryInstance?.RegistryLoginServer" ReadOnly="true" />
-                            </MudItem>
-                            <MudItem xs="6">
-                                <MudTextField Label="Updated On" Value="@RepositoryInstance?.ModifiedDate" ReadOnly="true" />
-                            </MudItem>
-                            <MudItem xs="6">
-                                <MudTextField Label="Created On" Value="@RepositoryInstance?.CreatedDate" ReadOnly="true" />
-                            </MudItem>
-                            <MudItem xs="6">
-                                <MudTextField Label="Manifest Count" Value="@RepositoryInstance?.ManifestCount" ReadOnly="true" />
-                            </MudItem>
-                            <MudItem xs="6">
-                                <MudTextField Label="Tag Count" Value="@RepositoryInstance?.TagCount" ReadOnly="true" />
+                                <MudTextField Label="Registry Login Server" Class="mt-2" Value="@RepositoryInstance?.RegistryLoginServer" ReadOnly="true" />
+                                <MudTextField Label="Updated On" Class="mt-2" Value="@RepositoryInstance?.ModifiedDate" ReadOnly="true" />
+                                <MudTextField Label="Tag Count" Class="mt-2" Value="@RepositoryInstance?.TagCount" ReadOnly="true" />
                             </MudItem>
                         </MudGrid>
                     </MudCardContent>
                 </MudCard>
-
             </div>
         </MudPaper>
     </MudItem>
     <MudItem xs="12">
-        <MudPaper Elevation="25" Class="d-flex flex-row pt-6 pb-4">
-            <MudIcon Icon="@Icons.Material.Filled.Analytics" Color="Color.Error" Class="mx-4" Style="width:54px; height:54px;"></MudIcon>
+        <MudPaper Elevation="25" Class="d-flex flex-row">
             <div style="width:100%;">
                 <MudCard Elevation="0"> 
-                    <MudCardHeader>
-                        <CardHeaderContent>
-                            <MudText Typo="Typo.subtitle1" Class="mud-text-secondary mb-n1">Repository Manifest</MudText>
-                        </CardHeaderContent>
-                    </MudCardHeader>
-                    <MudCardContent Class="pa-0">
+                    <MudCardContent Class="p-0">
                         <MudTabs Elevation="2" Rounded="true" ApplyEffectsToContainer="true" PanelClass="pa-6">
                             <MudTabPanel Text="Manifest">
                                 <MudText xs="12">
@@ -57,12 +48,6 @@
                                         @(JsonSerializer.Serialize(RepositoryInstance?.Manifest, new JsonSerializerOptions() { WriteIndented = true }))
                                 </pre>
                                 </MudText>
-                            </MudTabPanel>
-                            <MudTabPanel Text="Guide">
-                                <MudText>Content Two</MudText>
-                            </MudTabPanel>
-                            <MudTabPanel Text="Code">
-                                <MudText>Content Three</MudText>
                             </MudTabPanel>
                         </MudTabs>
                     </MudCardContent>

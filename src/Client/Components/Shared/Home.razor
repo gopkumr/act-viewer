@@ -5,32 +5,15 @@
 
 @using System.Security.Claims
 
-<HeroTitle Title="Module Details" Description="Azure bicep registry module details." />
-
 @if (!_loaded)
 {
     <MudProgressCircular Color="Color.Primary" Indeterminate="true" />
 }
 else
 {
-   @*  if (SelectedItem != null)
-    {
-        switch (SelectedItem.Type)
-        {
-            case TreeViewType.Repository:
-                <Repository RepositoryName="@SelectedItem.Name" />
-                break;
-            case TreeViewType.Tag:
-                <Tag TagName="@SelectedItem.Name" RepositoryName="@SelectedItem.ParentName" />
-                break;
-            default:
-                <MudText Typo="Typo.h6">Select an item to view details.</MudText>
-                break;
-        }
-    }
-    else
-    { *@
-        <MudText Typo="Typo.h6">Select an item to view details.</MudText>
-    @* } *@
+
+    <MudText Typo="Typo.subtitle1" Align="Align.Center" Class="mt-15" Style="color: #B0B0B0;">
+        Your selection will appear here
+    </MudText>
 
 }

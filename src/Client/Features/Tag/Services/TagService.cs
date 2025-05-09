@@ -8,5 +8,10 @@ namespace ACRViewer.BlazorServer.Features.Tag.Services
         {
             return await containerRegistryClientService.GetTag(repositoryName, tagOrDigest);
         }
+
+        public async Task<string> DownloadTagSourceCode(string repositoryName, string tagOrDigest)
+        {
+            return await containerRegistryClientService.GetTagSource(repositoryName, tagOrDigest);
+        }
     }
 }

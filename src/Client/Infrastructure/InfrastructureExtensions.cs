@@ -9,7 +9,7 @@ namespace ACRViewer.BlazorServer.Infrastructure
             serviceCollection
              .AddScoped<ITokenService, TokenService>()
              .AddScoped<IAuthenticationManager, AuthenticationManager>()
-             .AddScoped<IContainerRegistryClientService, ContainerRegistryClientService>()
+             .AddHttpClient<IContainerRegistryClientService, ContainerRegistryClientService>()
             ;
 
             return serviceCollection;

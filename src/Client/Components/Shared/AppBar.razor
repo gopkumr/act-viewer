@@ -1,6 +1,6 @@
 ﻿<AuthorizeView>
     <NotAuthorized>
-        <MudAppBar Elevation="4" Color="Color.Primary">
+        <MudAppBar Elevation="4" Color="Color.Primary" Style="background: #15304B;">
             <MudSpacer />
             <MudTooltip Text="Toggle Dark Mode">
                 <MudIconButton Icon="@Icons.Material.Filled.Brightness4" Color="Color.Inherit" OnClick="@((e) => DarkMode())" />
@@ -8,9 +8,14 @@
         </MudAppBar>
     </NotAuthorized>
     <Authorized>
-        <MudAppBar Elevation="25">
-            <MudIcon Icon="@CustomIcons.Blazor" Size="Size.Large" ViewBox="0 0 500 500" />
-            <MudText Typo="Typo.h6" Class="ml-4">Arinco Module Hub</MudText>
+        <MudAppBar Elevation="4" Style="background: #15304B;">
+            <MudHidden Breakpoint="Breakpoint.SmAndDown" Invert="true">
+                <MudIconButton Icon="@Icons.Material.Filled.Menu" Color="Color.Inherit" Edge="Edge.Start" OnClick="@((e) => ToggerDraw())" />
+            </MudHidden>
+            <MudText Typo="Typo.h6" Class="ml-2" Style="color: #F5F6FA;">
+                <img src="arinco-logo.svg" alt="ARINCO Logo" style="height:30px; vertical-align:middle; margin-right:8px;" />
+                ARINCO <span style="font-weight:300;">Bicep Hub</span>
+            </MudText>
             <MudSpacer />
             <MudDivider Vertical="true" FlexItem="true" DividerType="DividerType.Middle" Class="mx-4 my-5" />
             <MudMenu Dense="true" Direction="Direction.Right" OffsetX="true" Class="px-4">
@@ -39,7 +44,7 @@
             </MudHidden>
             <MudMenu Direction="_rightToLeft ? Direction.Right : Direction.Left" OffsetX="true" Dense="true" Class="mt-1 ml-4">
                 <ActivatorContent>
-                    <MudAvatar Color="Color.Secondary">@FirstLetterOfName</MudAvatar>
+                    <MudAvatar Color="Color.Info" Variant="Variant.Outlined">@FirstLetterOfName</MudAvatar>
                 </ActivatorContent>
                 <ChildContent>
                     <UserCard Class="mt-n2" />

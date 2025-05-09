@@ -42,7 +42,7 @@ namespace ACRViewer.BlazorServer.Components.Features.Navigation
             var respositories = repositories.Select(r => new TreeItemData<TreeViewItemViewModel>
             {
                 Value = new TreeViewItemViewModel(TreeViewType.Repository, r, acrName),
-                Icon = Icons.Material.Filled.Folder,
+                Icon = Icons.Material.Outlined.Folder,
                 Expanded = false,
             }).ToList();
 
