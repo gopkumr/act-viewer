@@ -1,11 +1,10 @@
 ﻿using ACRViewer.BlazorServer.Core.Interface;
 using ACRViewer.BlazorServer.Core.Utilities;
+using ACRViewer.BlazorServer.Features.Navigation.Services;
 using Microsoft.AspNetCore.Components;
 using Microsoft.Identity.Web;
 using MudBlazor;
-using System.Diagnostics.Contracts;
 using System.Reflection.Metadata;
-using System.Runtime.CompilerServices;
 
 namespace ACRViewer.BlazorServer.Components.Shared
 {
@@ -28,7 +27,9 @@ namespace ACRViewer.BlazorServer.Components.Shared
         [Parameter]
         public EventCallback<bool> IsDrawOpenChanged { get; set; }
 
-        private string AssemblyVersion { get; set; }
+        private string? AssemblyVersion { get; set; }
+
+        private string? ModuleRegistryName { get; set; }
 
 
         private bool _isDarkMode = false;
@@ -36,6 +37,8 @@ namespace ACRViewer.BlazorServer.Components.Shared
         [Inject] private NavigationManager NavigationManager { get; set; }
 
         [Inject] private IAuthenticationManager? AuthenticationManager { get; set; }
+
+        [Inject] private ISharedService? SharedService { get; set; }
 
         protected override async Task OnInitializedAsync()
         {
@@ -58,6 +61,8 @@ namespace ACRViewer.BlazorServer.Components.Shared
                 var assembly = System.Reflection.Assembly.GetExecutingAssembly();
                 var version = assembly.GetName().Version?.ToString() ?? "Unknown";
                 AssemblyVersion = version;
+
+                ModuleRegistryName = SharedService?.GetRepositoryName() ?? "Unknown";
             }
             catch (MicrosoftIdentityWebChallengeUserException)
             {

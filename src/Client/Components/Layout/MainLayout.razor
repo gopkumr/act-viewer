@@ -8,16 +8,16 @@
 
 <AuthorizeView>
     <NotAuthorized>
-        <MudLayout Style="height: 100vh;  margin: 0; padding: 0;">
-            <MudMainContent Class="h-100" Style="margin: 0; padding: 0;">
+        <MudLayout Style="height: 100%;">
+            <MudMainContent Style="margin: 0; padding: 0; overflow-y: auto">
                 @Body
             </MudMainContent> 
         </MudLayout>
     </NotAuthorized>
     <Authorized>
-        <MudLayout Style="height: 100vh; margin: 0; padding: 0;">
+        <MudLayout Style="height: 100%; margin: 0; padding: 0;">
             <AppBar @bind-CurrentTheme="CurrentTheme" @bind-IsDrawOpen="_drawerOpen" />
-            <MudDrawer @bind-Open="_drawerOpen" Elevation="25" ClipMode="DrawerClipMode.Docked">
+            <MudDrawer @bind-Open="_drawerOpen" Width="25%" Elevation="25" ClipMode="DrawerClipMode.Docked">
                 <NavMenu />
             </MudDrawer>
             <MudMainContent>

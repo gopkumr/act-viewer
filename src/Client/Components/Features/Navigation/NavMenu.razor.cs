@@ -43,20 +43,12 @@ namespace ACRViewer.BlazorServer.Components.Features.Navigation
             var repositories = await NavigationService.GetRepositoryNames() ?? [];
             var acrName = NavigationService.GetRepositoryName() ?? "No ACR Configured";
 
-            var respositories = repositories.Select(r => new TreeItemData<TreeViewItemViewModel>
+            Repositories.AddRange([.. repositories.Select(r => new TreeItemData<TreeViewItemViewModel>
             {
                 Value = new TreeViewItemViewModel(TreeViewType.Repository, r, acrName),
                 Icon = Icons.Material.Outlined.Folder,
                 Expanded = false,
-            }).ToList();
-
-            Repositories.Add(new TreeItemData<TreeViewItemViewModel>
-            {
-                Value = new TreeViewItemViewModel(TreeViewType.ACR, acrName, string.Empty),
-                Icon = Icons.Material.Filled.Apps,
-                Expanded = true,
-                Children = respositories
-            });
+            })]);
         }
         public async Task<IReadOnlyCollection<TreeItemData<TreeViewItemViewModel>>> LoadServerData(TreeViewItemViewModel parentValue)
         {

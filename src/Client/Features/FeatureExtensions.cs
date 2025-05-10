@@ -11,6 +11,7 @@ namespace ACRViewer.BlazorServer.Infrastructure
         {
             serviceCollection
              .AddScoped<INavigationService, NavigationService>()
+             .AddScoped<ISharedService, SharedService>()
              .AddScoped<IRepositoryService, RepositoryService>()
              .AddScoped<ITagService, TagService>()
             ;
