@@ -1,10 +1,10 @@
-﻿using ACRViewer.BlazorServer.Core.Models;
-using ACRViewer.BlazorServer.Features.Tag.Services;
+﻿using Arinco.BicepHub.App.Core.Models;
+using Arinco.BicepHub.App.Features.Tag.Services;
 using Microsoft.AspNetCore.Components;
 using Microsoft.JSInterop;
 using System.Text;
 
-namespace ACRViewer.BlazorServer.Components.Features.Tag
+namespace Arinco.BicepHub.App.Components.Features.Tag
 {
     public partial class Tag
     {

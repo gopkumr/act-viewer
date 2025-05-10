@@ -1,6 +1,6 @@
-﻿using ACRViewer.BlazorServer.Core.Interface;
+﻿using Arinco.BicepHub.App.Core.Interface;
 
-namespace ACRViewer.BlazorServer.Features.Tag.Services
+namespace Arinco.BicepHub.App.Features.Tag.Services
 {
     public class TagService(IContainerRegistryClientService containerRegistryClientService) : ITagService
     {

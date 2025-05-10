@@ -1,6 +1,6 @@
-﻿using ACRViewer.BlazorServer.Core.Interface;
+﻿using Arinco.BicepHub.App.Core.Interface;
 
-namespace ACRViewer.BlazorServer.Core.Utilities
+namespace Arinco.BicepHub.App.Core.Utilities
 {
     public class MenuStateService : IMenuStateService
     {

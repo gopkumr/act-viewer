@@ -1,4 +1,4 @@
-﻿namespace ACRViewer.BlazorServer.Core.Interface
+﻿namespace Arinco.BicepHub.App.Core.Interface
 {
     public interface ITokenService
     {

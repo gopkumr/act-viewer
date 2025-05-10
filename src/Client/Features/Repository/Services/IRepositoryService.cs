@@ -4,7 +4,7 @@
 
 
 
-namespace ACRViewer.BlazorServer.Features.Repository.Services
+namespace Arinco.BicepHub.App.Features.Repository.Services
 {
     public interface IRepositoryService
     {

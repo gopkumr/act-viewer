@@ -1,7 +1,7 @@
-﻿using ACRViewer.BlazorServer.Core.Interface;
+﻿using Arinco.BicepHub.App.Core.Interface;
 using Microsoft.Identity.Web;
 
-namespace ACRViewer.BlazorServer.Infrastructure
+namespace Arinco.BicepHub.App.Infrastructure
 {
     public class TokenService(
          IHttpContextAccessor httpContextAccessor,

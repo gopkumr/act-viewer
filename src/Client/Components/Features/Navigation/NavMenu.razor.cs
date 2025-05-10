@@ -1,10 +1,10 @@
-﻿using ACRViewer.BlazorServer.Core.Interface;
-using ACRViewer.BlazorServer.Core.Utilities;
-using ACRViewer.BlazorServer.Features.Navigation.Services;
+﻿using Arinco.BicepHub.App.Core.Interface;
+using Arinco.BicepHub.App.Core.Utilities;
+using Arinco.BicepHub.App.Features.Navigation.Services;
 using Microsoft.AspNetCore.Components;
 using MudBlazor;
 
-namespace ACRViewer.BlazorServer.Components.Features.Navigation
+namespace Arinco.BicepHub.App.Components.Features.Navigation
 {
     public partial class NavMenu
     {

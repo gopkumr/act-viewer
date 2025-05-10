@@ -1,6 +1,6 @@
 ﻿using Azure.Core;
 
-namespace ACRViewer.BlazorServer.Core.Utilities;
+namespace Arinco.BicepHub.App.Core.Utilities;
 
 public class CustomTokenCredential(string token) : TokenCredential
 {

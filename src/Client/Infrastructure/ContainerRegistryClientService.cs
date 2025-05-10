@@ -1,6 +1,6 @@
-﻿using ACRViewer.BlazorServer.Core.Interface;
-using ACRViewer.BlazorServer.Core.Models;
-using ACRViewer.BlazorServer.Core.Utilities;
+﻿using Arinco.BicepHub.App.Core.Interface;
+using Arinco.BicepHub.App.Core.Models;
+using Arinco.BicepHub.App.Core.Utilities;
 using Azure;
 using Azure.Containers.ContainerRegistry;
 using SharpCompress.Archives.Tar;
@@ -11,7 +11,7 @@ using System.Net.Http;
 using System.Text;
 using System.Text.Json.Nodes;
 
-namespace ACRViewer.BlazorServer.Infrastructure
+namespace Arinco.BicepHub.App.Infrastructure
 {
     public class ContainerRegistryClientService(ACRSettings acrSettings, IAuthenticationManager authenticationManager, HttpClient httpClient)
         : IContainerRegistryClientService

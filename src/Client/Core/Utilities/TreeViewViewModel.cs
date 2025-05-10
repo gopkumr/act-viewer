@@ -1,4 +1,4 @@
-﻿namespace ACRViewer.BlazorServer.Core.Utilities
+﻿namespace Arinco.BicepHub.App.Core.Utilities
 {
     public class TreeViewItemViewModel(TreeViewType type, string name, string parentName, bool hasChildren = true)
     {

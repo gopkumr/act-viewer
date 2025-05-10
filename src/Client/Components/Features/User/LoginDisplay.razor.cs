@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Components;
 
-namespace ACRViewer.BlazorServer.Components.Features.User
+namespace Arinco.BicepHub.App.Components.Features.User
 {
     public partial class LoginDisplay
     {

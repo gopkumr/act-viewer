@@ -1,6 +1,6 @@
-﻿using ACRViewer.BlazorServer.Core.Utilities;
+﻿using Arinco.BicepHub.App.Core.Utilities;
 
-namespace ACRViewer.BlazorServer.Core.Models
+namespace Arinco.BicepHub.App.Core.Models
 {
     public class User
     {

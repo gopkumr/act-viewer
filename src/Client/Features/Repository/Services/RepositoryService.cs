@@ -1,7 +1,7 @@
-﻿using ACRViewer.BlazorServer.Core.Interface;
-using ACRViewer.BlazorServer.Core.Models;
+﻿using Arinco.BicepHub.App.Core.Interface;
+using Arinco.BicepHub.App.Core.Models;
 
-namespace ACRViewer.BlazorServer.Features.Repository.Services
+namespace Arinco.BicepHub.App.Features.Repository.Services
 {
     public class RepositoryService(IContainerRegistryClientService containerRegistryClientService) : IRepositoryService
     {

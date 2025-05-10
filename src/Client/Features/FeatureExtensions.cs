@@ -1,9 +1,9 @@
-﻿using ACRViewer.BlazorServer.Core.Interface;
-using ACRViewer.BlazorServer.Features.Navigation.Services;
-using ACRViewer.BlazorServer.Features.Repository.Services;
-using ACRViewer.BlazorServer.Features.Tag.Services;
+﻿using Arinco.BicepHub.App.Core.Interface;
+using Arinco.BicepHub.App.Features.Navigation.Services;
+using Arinco.BicepHub.App.Features.Repository.Services;
+using Arinco.BicepHub.App.Features.Tag.Services;
 
-namespace ACRViewer.BlazorServer.Infrastructure
+namespace Arinco.BicepHub.App.Infrastructure
 {
     public static class FeatureExtensions
     {

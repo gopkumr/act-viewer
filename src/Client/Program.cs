@@ -1,11 +1,11 @@
-using ACRViewer.BlazorServer.Components;
-using ACRViewer.BlazorServer.Core.Utilities;
-using ACRViewer.BlazorServer.Infrastructure;
+using Arinco.BicepHub.App.Components;
+using Arinco.BicepHub.App.Core.Utilities;
+using Arinco.BicepHub.App.Infrastructure;
 using Microsoft.AspNetCore.Authentication.OpenIdConnect;
 using Microsoft.Identity.Web;
 using Microsoft.Identity.Web.UI;
 
-namespace ACRViewer.BlazorServer;
+namespace Arinco.BicepHub.App;
 
 public class Program
 {
@@ -72,7 +72,7 @@ public class Program
         app.MapControllers(); // Required for MicrosoftIdentity controllers
         app.MapRazorPages();  // Required for MicrosoftIdentity Razor pages
 
-        app.MapRazorComponents<App>()
+        app.MapRazorComponents<Components.App>()
             .AddInteractiveServerRenderMode();
 
         app.Run();

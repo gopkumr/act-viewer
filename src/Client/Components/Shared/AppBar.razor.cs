@@ -1,12 +1,12 @@
-﻿using ACRViewer.BlazorServer.Core.Interface;
-using ACRViewer.BlazorServer.Core.Utilities;
-using ACRViewer.BlazorServer.Features.Navigation.Services;
+﻿using Arinco.BicepHub.App.Core.Interface;
+using Arinco.BicepHub.App.Core.Utilities;
+using Arinco.BicepHub.App.Features.Navigation.Services;
 using Microsoft.AspNetCore.Components;
 using Microsoft.Identity.Web;
 using MudBlazor;
 using System.Reflection.Metadata;
 
-namespace ACRViewer.BlazorServer.Components.Shared
+namespace Arinco.BicepHub.App.Components.Shared
 {
     public partial class AppBar
     {

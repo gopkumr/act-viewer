@@ -1,5 +1,5 @@
 ﻿
-namespace ACRViewer.BlazorServer.Features.Navigation.Services
+namespace Arinco.BicepHub.App.Features.Navigation.Services
 {
     public interface ISharedService
     {

@@ -1,6 +1,6 @@
 ﻿using System.Text.Json.Nodes;
 
-namespace ACRViewer.BlazorServer.Core.Models
+namespace Arinco.BicepHub.App.Core.Models
 {
     public class Repository
     {

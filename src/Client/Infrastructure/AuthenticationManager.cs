@@ -1,12 +1,12 @@
-﻿using ACRViewer.BlazorServer.Core.Interface;
-using ACRViewer.BlazorServer.Core.Models;
-using ACRViewer.BlazorServer.Core.Utilities;
+﻿using Arinco.BicepHub.App.Core.Interface;
+using Arinco.BicepHub.App.Core.Models;
+using Arinco.BicepHub.App.Core.Utilities;
 using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.Extensions.Caching.Memory;
 using Microsoft.Identity.Client;
 using Microsoft.Identity.Web;
 
-namespace ACRViewer.BlazorServer.Infrastructure
+namespace Arinco.BicepHub.App.Infrastructure
 {
     public class AuthenticationManager(
             AuthenticationStateProvider authenticationStateProvider,

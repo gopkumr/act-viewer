@@ -1,7 +1,7 @@
-﻿using ACRViewer.BlazorServer.Core.Interface;
+﻿using Arinco.BicepHub.App.Core.Interface;
 using Microsoft.AspNetCore.Components;
 
-namespace ACRViewer.BlazorServer.Components.Features.User
+namespace Arinco.BicepHub.App.Components.Features.User
 {
     public partial class UserCard
     {

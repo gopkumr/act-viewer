@@ -1,7 +1,7 @@
-﻿using ACRViewer.BlazorServer.Core.Utilities;
+﻿using Arinco.BicepHub.App.Core.Utilities;
 using MudBlazor;
 
-namespace ACRViewer.BlazorServer.Components.Layout
+namespace Arinco.BicepHub.App.Components.Layout
 {
     public partial class MainLayout
     {

@@ -2,5 +2,5 @@ using Aspire.Hosting;
 using Projects;
 
 var builder = DistributedApplication.CreateBuilder(args);
-builder.AddProject<Projects.ACRViewer_BlazorServer>("acrviewer-blazorserver");
+builder.AddProject<Projects.Arinco_BicepHub_App>("acrviewer-blazorserver");
 builder.Build().Run();
