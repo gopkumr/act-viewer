@@ -4,7 +4,7 @@
 
 
 
-namespace ACRViewer.BlazorServer.Features.Tag.Services
+namespace Arinco.BicepHub.App.Features.Tag.Services
 {
     public interface ITagService
     {

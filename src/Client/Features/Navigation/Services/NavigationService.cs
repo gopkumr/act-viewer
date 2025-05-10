@@ -1,6 +1,6 @@
-﻿using ACRViewer.BlazorServer.Core.Interface;
+﻿using Arinco.BicepHub.App.Core.Interface;
 
-namespace ACRViewer.BlazorServer.Features.Navigation.Services
+namespace Arinco.BicepHub.App.Features.Navigation.Services
 {
     public class NavigationService(IContainerRegistryClientService containerRegistryClientService) : INavigationService
     {

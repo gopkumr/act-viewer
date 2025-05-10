@@ -18,7 +18,7 @@
             </MudText>
             <MudSpacer />
             <MudDivider Vertical="true" FlexItem="true" DividerType="DividerType.Middle" Class="mx-4 my-5" />
-            <MudMenu Dense="true" Direction="Direction.Right" OffsetX="true" Class="px-4">
+            <MudMenu Dense="true" Class="px-4">
                 <ActivatorContent>
                     <MudIconButton Icon="@Icons.Material.Filled.Info" Color="Color.Inherit" />
                 </ActivatorContent>
@@ -36,7 +36,7 @@
                 </MudTooltip>
             </MudHidden>
             <MudHidden Breakpoint="Breakpoint.SmAndDown" Invert="true">
-                <MudMenu Icon="@Icons.Material.Filled.Settings" Color="Color.Inherit" Dense="true" Direction="Direction.Right" OffsetY="true">
+                <MudMenu Icon="@Icons.Material.Filled.Settings" Color="Color.Inherit" Dense="true">
                     <div class="px-2">
                         <MudTooltip Text="Toggle Dark Mode">
                             <MudIconButton Icon="@Icons.Material.Filled.Brightness4" Color="Color.Inherit" OnClick="@((e) => DarkMode())" />
@@ -44,7 +44,7 @@
                     </div>
                 </MudMenu>
             </MudHidden>
-            <MudMenu Direction="_rightToLeft ? Direction.Right : Direction.Left" OffsetX="true" Dense="true" Class="mt-1 ml-4">
+            <MudMenu Dense="true" Class="mt-1 ml-4">
                 <ActivatorContent>
                     <MudAvatar Color="Color.Info" Variant="Variant.Outlined">@FirstLetterOfName</MudAvatar>
                 </ActivatorContent>

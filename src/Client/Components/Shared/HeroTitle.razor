@@ -1,10 +1,10 @@
-﻿@namespace ACRViewer.BlazorServer.Components.Shared
+﻿@namespace Arinco.BicepHub.App.Components.Shared
 
 <MudText Typo="Typo.h5" Color="Color.Primary" Class="mb-2">@Title</MudText>
 <MudText Color="Color.Surface" Class="mb-4">@Description</MudText>
 
 @code
 {
-    [Parameter] public string Title { get; set; }
-    [Parameter] public string Description { get; set; }
+    [Parameter] public required string Title { get; set; }
+    [Parameter] public required string Description { get; set; }
 }

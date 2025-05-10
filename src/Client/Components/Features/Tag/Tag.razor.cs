@@ -1,10 +1,9 @@
-﻿using ACRViewer.BlazorServer.Core.Models;
-using ACRViewer.BlazorServer.Features.Tag.Services;
+﻿using Arinco.BicepHub.App.Features.Tag.Services;
 using Microsoft.AspNetCore.Components;
 using Microsoft.JSInterop;
 using System.Text;
 
-namespace ACRViewer.BlazorServer.Components.Features.Tag
+namespace Arinco.BicepHub.App.Components.Features.Tag
 {
     public partial class Tag
     {
@@ -18,7 +17,7 @@ namespace ACRViewer.BlazorServer.Components.Features.Tag
 
         [Inject] private ITagService? TagService { get; set; }
 
-        [Inject] private IJSRuntime JSRuntime { get; set; }
+        [Inject] private IJSRuntime? JSRuntime { get; set; }
 
         private Core.Models.Tag? TagInstance { get; set; }
 
@@ -45,8 +44,12 @@ namespace ACRViewer.BlazorServer.Components.Features.Tag
                 var source = await TagService.DownloadTagSourceCode(RepositoryName, TagName);
                 if (source != null)
                 {
-                    var fileName=$"{RepositoryName.Split('/').Last()}.{TagName}.bicep";
+                    var fileName = $"{RepositoryName.Split('/').Last()}.{TagName}.bicep";
                     var base64Content = Convert.ToBase64String(Encoding.UTF8.GetBytes(source));
+                    if (JSRuntime == null)
+                    {
+                        throw new InvalidOperationException("JSRuntime not injected");
+                    }
                     await JSRuntime.InvokeVoidAsync("downloadFile", fileName, base64Content, "text/plain");
                 }
                 Downloading = false;

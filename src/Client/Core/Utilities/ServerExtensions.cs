@@ -1,9 +1,9 @@
-﻿using ACRViewer.BlazorServer.Core.Interface;
-using ACRViewer.BlazorServer.Infrastructure;
+﻿using Arinco.BicepHub.App.Core.Interface;
+using Arinco.BicepHub.App.Infrastructure;
 using MudBlazor;
 using MudBlazor.Services;
 
-namespace ACRViewer.BlazorServer.Core.Utilities
+namespace Arinco.BicepHub.App.Core.Utilities
 {
     public static class InfrastructureExtensions
     {

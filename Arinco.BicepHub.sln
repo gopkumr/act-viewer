@@ -5,13 +5,13 @@ VisualStudioVersion = 17.12.35527.113
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Client", "Client", "{595DB830-4892-444B-B01A-00E3F160ECEC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ACRViewer.AppHost", "src\Host\AppHost\ACRViewer.AppHost.csproj", "{C48AE41C-9D14-450E-BDBB-04B428EF04C0}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Arinco.BicepHub.AppHost", "src\Host\AppHost\Arinco.BicepHub.AppHost.csproj", "{C48AE41C-9D14-450E-BDBB-04B428EF04C0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ACRViewer.ServiceDefaults", "src\Host\ServiceDefaults\ACRViewer.ServiceDefaults.csproj", "{1C70072F-CD6E-4FDB-8BC6-BDA876E79188}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Arinco.BicepHub.ServiceDefaults", "src\Host\ServiceDefaults\Arinco.BicepHub.ServiceDefaults.csproj", "{1C70072F-CD6E-4FDB-8BC6-BDA876E79188}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Hosts", "Hosts", "{6379DF04-364A-4072-B4E3-76F49F1B8D60}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ACRViewer.BlazorServer", "src\Client\ACRViewer.BlazorServer.csproj", "{8B65192F-D647-433B-A4EB-46A2EA83B00F}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Arinco.BicepHub.App", "src\Client\Arinco.BicepHub.App.csproj", "{8B65192F-D647-433B-A4EB-46A2EA83B00F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

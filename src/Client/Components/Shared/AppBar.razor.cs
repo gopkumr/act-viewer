@@ -1,12 +1,12 @@
-﻿using ACRViewer.BlazorServer.Core.Interface;
-using ACRViewer.BlazorServer.Core.Utilities;
-using ACRViewer.BlazorServer.Features.Navigation.Services;
+﻿using Arinco.BicepHub.App.Core.Interface;
+using Arinco.BicepHub.App.Core.Utilities;
+using Arinco.BicepHub.App.Features.Navigation.Services;
 using Microsoft.AspNetCore.Components;
 using Microsoft.Identity.Web;
 using MudBlazor;
 using System.Reflection.Metadata;
 
-namespace ACRViewer.BlazorServer.Components.Shared
+namespace Arinco.BicepHub.App.Components.Shared
 {
     public partial class AppBar
     {
@@ -37,7 +37,7 @@ namespace ACRViewer.BlazorServer.Components.Shared
         [Parameter]
         public EventCallback<bool> IsDarkModeChanged { get; set; }
 
-        [Inject] private NavigationManager NavigationManager { get; set; }
+        [Inject] private NavigationManager? NavigationManager { get; set; }
 
         [Inject] private IAuthenticationManager? AuthenticationManager { get; set; }
 
@@ -48,6 +48,11 @@ namespace ACRViewer.BlazorServer.Components.Shared
             if (AuthenticationManager == null)
             {
                 throw new InvalidOperationException("Authentication Manager not injected");
+            }
+
+            if(NavigationManager == null)
+            {
+                throw new InvalidOperationException("Navigation Manager not injected");
             }
 
             try
@@ -75,6 +80,10 @@ namespace ACRViewer.BlazorServer.Components.Shared
 
         private void Logout()
         {
+            if (NavigationManager == null)
+            {
+                throw new InvalidOperationException("Navigation Manager not injected");
+            }
             NavigationManager.NavigateTo("/MicrosoftIdentity/Account/SignOut", forceLoad: true);
         }
 

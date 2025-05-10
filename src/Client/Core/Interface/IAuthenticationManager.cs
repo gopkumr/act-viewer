@@ -1,6 +1,6 @@
-﻿using ACRViewer.BlazorServer.Core.Models;
+﻿using Arinco.BicepHub.App.Core.Models;
 
-namespace ACRViewer.BlazorServer.Core.Interface
+namespace Arinco.BicepHub.App.Core.Interface
 {
     public interface IAuthenticationManager
     {

@@ -1,7 +1,7 @@
-﻿using ACRViewer.BlazorServer.Features.Repository.Services;
+﻿using Arinco.BicepHub.App.Features.Repository.Services;
 using Microsoft.AspNetCore.Components;
 
-namespace ACRViewer.BlazorServer.Components.Features.Repository
+namespace Arinco.BicepHub.App.Components.Features.Repository
 {
     public partial class Repository
     {

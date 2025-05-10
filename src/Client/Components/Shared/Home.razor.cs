@@ -1,8 +1,8 @@
-﻿using ACRViewer.BlazorServer.Core.Interface;
-using ACRViewer.BlazorServer.Core.Utilities;
+﻿using Arinco.BicepHub.App.Core.Interface;
+using Arinco.BicepHub.App.Core.Utilities;
 using Microsoft.AspNetCore.Components;
 
-namespace ACRViewer.BlazorServer.Components.Shared
+namespace Arinco.BicepHub.App.Components.Shared
 {
     public partial class Home
     {
