@@ -1,8 +1,8 @@
 # yaml-language-server: $schema=https://raw.githubusercontent.com/Azure/azure-dev/main/schemas/v1.0/azure.yaml.json
 
-name: acrviewer
+name: ArincoBicepHub
 services:  
   app:
     language: dotnet
-    project: ./src/Host/AppHost/ACRViewer.AppHost.csproj
+    project: ./src/Host/AppHost/Arinco.BicepHub.AppHost.csproj
     host: containerapp

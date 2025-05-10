@@ -5,10 +5,13 @@
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
     <GenerateAssemblyInfo>true</GenerateAssemblyInfo>
-    <PackageId>Arinco.ModuleHub</PackageId>
-    <Title>Arinco Biceo Module Hub</Title>
+    <PackageId>Arinco.BicepHub</PackageId>
+    <Title>Arinco Bicep Hub</Title>
     <NeutralLanguage>en-AU</NeutralLanguage>
-    <AssemblyVersion>0.0.1</AssemblyVersion>
+    <AssemblyVersion>0.0.1.10</AssemblyVersion>
+    <Company>Arinco</Company>
+    <Authors>Arinco.BicepHub</Authors>
+    <Product>Arinco.BicepHub</Product>
   </PropertyGroup>
 	<ItemGroup>
     <ProjectReference Include="..\Host\ServiceDefaults\Arinco.BicepHub.ServiceDefaults.csproj" />
