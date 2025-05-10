@@ -1,7 +1,7 @@
 ﻿@inherits LayoutComponentBase
 @using Microsoft.AspNetCore.Authorization
 
-<MudThemeProvider Theme="CurrentTheme" />
+<MudThemeProvider Theme="CurrentTheme" IsDarkMode="@_isDarkMode" />
 <MudDialogProvider />
 <MudSnackbarProvider />
 <MudPopoverProvider />
@@ -16,7 +16,7 @@
     </NotAuthorized>
     <Authorized>
         <MudLayout Style="height: 100%; margin: 0; padding: 0;">
-            <AppBar @bind-CurrentTheme="CurrentTheme" @bind-IsDrawOpen="_drawerOpen" />
+            <AppBar @bind-CurrentTheme="CurrentTheme" @bind-IsDrawOpen="_drawerOpen" @bind-IsDarkMode="_isDarkMode" />
             <MudDrawer @bind-Open="_drawerOpen" Width="25%" Elevation="25" ClipMode="DrawerClipMode.Docked">
                 <NavMenu />
             </MudDrawer>

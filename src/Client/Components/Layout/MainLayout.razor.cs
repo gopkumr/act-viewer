@@ -9,5 +9,7 @@ namespace ACRViewer.BlazorServer.Components.Layout
 
         private bool _drawerOpen = true;
 
+        private bool _isDarkMode = false;
+
     }
 }

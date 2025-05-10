@@ -31,8 +31,11 @@ namespace ACRViewer.BlazorServer.Components.Shared
 
         private string? ModuleRegistryName { get; set; }
 
+        [Parameter]
+        public bool IsDarkMode { get; set; } = false;
 
-        private bool _isDarkMode = false;
+        [Parameter]
+        public EventCallback<bool> IsDarkModeChanged { get; set; }
 
         [Inject] private NavigationManager NavigationManager { get; set; }
 
@@ -77,12 +80,13 @@ namespace ACRViewer.BlazorServer.Components.Shared
 
         private async Task DarkMode()
         {
-            CurrentTheme = _isDarkMode
+            CurrentTheme = IsDarkMode
                 ? BlazorTheme.DefaultTheme
                 : BlazorTheme.DarkTheme;
 
-            _isDarkMode = !_isDarkMode;
+            IsDarkMode = !IsDarkMode;
 
+            await IsDarkModeChanged.InvokeAsync(IsDarkMode);
             await CurrentThemeChanged.InvokeAsync(CurrentTheme);
         }
 

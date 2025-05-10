@@ -8,73 +8,73 @@ namespace ACRViewer.BlazorServer.Core.Utilities
         {
             Default = new DefaultTypography()
             {
-                FontFamily = new[] { "Montserrat", "Helvetica", "Arial", "sans-serif" },
+                FontFamily = new[] { "Montserrat", "Sans-serif" },
                 FontSize = ".875rem",
                 LetterSpacing = ".01071em"
             },
             H1 = new H1Typography()
             {
-                FontFamily = new[] { "Montserrat", "Helvetica", "Arial", "sans-serif" },
+                FontFamily = new[] { "Montserrat", "Sans-serif" },
                 FontSize = "6rem",
                 LetterSpacing = "-.01562em"
             },
             H2 = new H2Typography()
             {
-                FontFamily = new[] { "Montserrat", "Helvetica", "Arial", "sans-serif" },
+                FontFamily = new[] { "Montserrat", "Sans-serif" },
                 FontSize = "3.75rem",
                 LetterSpacing = "-.00833em"
             },
             H3 = new H3Typography()
             {
-                FontFamily = new[] { "Montserrat", "Helvetica", "Arial", "sans-serif" },
+                FontFamily = new[] { "Montserrat", "Sans-serif" },
                 FontSize = "3rem",
                 LetterSpacing = "0"
             },
             H4 = new H4Typography()
             {
-                FontFamily = new[] { "Montserrat", "Helvetica", "Arial", "sans-serif" },
+                FontFamily = new[] { "Montserrat", "Sans-serif" },
                 FontSize = "2.125rem",
                 LetterSpacing = ".00735em"
             },
             H5 = new H5Typography()
             {
-                FontFamily = new[] { "Montserrat", "Helvetica", "Arial", "sans-serif" },
+                FontFamily = new[] { "Montserrat", "Sans-serif" },
                 FontSize = "1.5rem",
                 LetterSpacing = "0"
             },
             H6 = new H6Typography()
             {
-                FontFamily = new[] { "Montserrat", "Helvetica", "Arial", "sans-serif" },
+                FontFamily = new[] { "Montserrat", "Sans-serif" },
                 FontSize = "1.25rem",
                 LetterSpacing = ".0075em"
             },
             Button = new ButtonTypography()
             {
-                FontFamily = new[] { "Montserrat", "Helvetica", "Arial", "sans-serif" },
+                FontFamily = new[] { "Montserrat", "Sans-serif" },
                 FontSize = ".875rem",
                 LetterSpacing = ".02857em"
             },
             Body1 = new Body1Typography()
             {
-                FontFamily = new[] { "Montserrat", "Helvetica", "Arial", "sans-serif" },
+                FontFamily = new[] { "Montserrat", "Sans-serif" },
                 FontSize = "1rem",
                 LetterSpacing = ".00938em"
             },
             Body2 = new Body2Typography()
             {
-                FontFamily = new[] { "Montserrat", "Helvetica", "Arial", "sans-serif" },
+                FontFamily = new[] { "Montserrat", "Sans-serif" },
                 FontSize = ".875rem",
                 LetterSpacing = ".01071em"
             },
             Caption = new CaptionTypography()
             {
-                FontFamily = new[] { "Montserrat", "Helvetica", "Arial", "sans-serif" },
+                FontFamily = new[] { "Montserrat", "Sans-serif" },
                 FontSize = ".75rem",
                 LetterSpacing = ".03333em"
             },
             Subtitle2 = new Subtitle2Typography()
             {
-                FontFamily = new[] { "Montserrat", "Helvetica", "Arial", "sans-serif" },
+                FontFamily = new[] { "Montserrat", "Sans-serif" },
                 FontSize = ".875rem",
                 LetterSpacing = ".00714em"
             }
@@ -85,7 +85,7 @@ namespace ACRViewer.BlazorServer.Core.Utilities
             DefaultBorderRadius = "3px"
         };
 
-        public static MudTheme DefaultTheme = new MudTheme()
+        public static MudTheme DefaultTheme = new()
         {
             PaletteLight = new PaletteLight()
             {
@@ -100,7 +100,7 @@ namespace ACRViewer.BlazorServer.Core.Utilities
             LayoutProperties = DefaultLayoutProperties
         };
 
-        public static MudTheme DarkTheme = new MudTheme()
+        public static MudTheme DarkTheme = new()
         {
 
             PaletteDark = new PaletteDark()

@@ -1,7 +1,7 @@
 ﻿@using Microsoft.AspNetCore.Authorization
 @attribute [Authorize]
 
-<MudTextField T="string" Label="Search" Class="flex-grow-0 mt-2 pt-0 pb-0 ml-2" Adornment="Adornment.End" Variant="Variant.Outlined" AdornmentIcon="@Icons.Material.Filled.Search" TextChanged="OnTextChanged" Immediate="true" Clearable="true" Style="width:90%; background:#FAFAFA;" />
+<MudTextField T="string" Label="Search" Class="flex-grow-0 mt-2 pt-0 pb-0 ml-2" Adornment="Adornment.End" Variant="Variant.Outlined" AdornmentIcon="@Icons.Material.Filled.Search" TextChanged="OnTextChanged" Immediate="true" Clearable="true" Style="width:90%;" />
 <MudTreeView T="TreeViewItemViewModel" @ref="_treeView" FilterFunc="MatchesName" ServerData="@LoadServerData" Items="@Repositories">
     <ItemTemplate>
         <ShimmerLoad IsLoading="@_isLoading">

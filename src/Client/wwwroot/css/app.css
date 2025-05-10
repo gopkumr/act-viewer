@@ -117,9 +117,10 @@ code {
 }
 
 .shimmer {
-    background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 37%, #f0f0f0 63%);
+    /*background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 37%, #f0f0f0 63%);*/
+    background: linear-gradient(90deg, #c0c0c0 25%, #a0a0a0 37%, #c0c0c0 63%);
     background-size: 400% 100%;
-    animation: shimmer 1.4s ease infinite;
+    animation: shimmer 0.6s ease infinite;
     height: 100px;
     border-radius: 8px;
     margin: 10px 0;
