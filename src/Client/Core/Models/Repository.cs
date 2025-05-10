@@ -4,8 +4,8 @@ namespace Arinco.BicepHub.App.Core.Models
 {
     public class Repository
     {
-        public string Name { get; set; }
-        public string RegistryLoginServer { get; set; }
+        public required string Name { get; set; }
+        public string? RegistryLoginServer { get; set; }
         public DateTimeOffset CreatedDate { get; set; }
         public DateTimeOffset ModifiedDate { get; set; }
         public int ManifestCount { get; set; }

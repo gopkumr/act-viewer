@@ -7,8 +7,6 @@ namespace Arinco.BicepHub.App.Components.Features.User
     {
         [Inject] private IAuthenticationManager? AuthenticationManager { get; set; }
 
-        [Inject] private NavigationManager NavigationManager { get; set; }
-
         [Parameter] public string Class { get; set; } = "";
         private string FirstName { get; set; } = "";
         private string SecondName { get; set; } = "";

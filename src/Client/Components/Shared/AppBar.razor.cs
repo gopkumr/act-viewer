@@ -37,7 +37,7 @@ namespace Arinco.BicepHub.App.Components.Shared
         [Parameter]
         public EventCallback<bool> IsDarkModeChanged { get; set; }
 
-        [Inject] private NavigationManager NavigationManager { get; set; }
+        [Inject] private NavigationManager? NavigationManager { get; set; }
 
         [Inject] private IAuthenticationManager? AuthenticationManager { get; set; }
 
@@ -48,6 +48,11 @@ namespace Arinco.BicepHub.App.Components.Shared
             if (AuthenticationManager == null)
             {
                 throw new InvalidOperationException("Authentication Manager not injected");
+            }
+
+            if(NavigationManager == null)
+            {
+                throw new InvalidOperationException("Navigation Manager not injected");
             }
 
             try
@@ -75,6 +80,10 @@ namespace Arinco.BicepHub.App.Components.Shared
 
         private void Logout()
         {
+            if (NavigationManager == null)
+            {
+                throw new InvalidOperationException("Navigation Manager not injected");
+            }
             NavigationManager.NavigateTo("/MicrosoftIdentity/Account/SignOut", forceLoad: true);
         }
 
