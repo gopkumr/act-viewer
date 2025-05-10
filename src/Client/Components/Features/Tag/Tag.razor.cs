@@ -1,4 +1,5 @@
-﻿using ACRViewer.BlazorServer.Features.Tag.Services;
+﻿using ACRViewer.BlazorServer.Core.Models;
+using ACRViewer.BlazorServer.Features.Tag.Services;
 using Microsoft.AspNetCore.Components;
 using Microsoft.JSInterop;
 using System.Text;
@@ -21,11 +22,17 @@ namespace ACRViewer.BlazorServer.Components.Features.Tag
 
         private Core.Models.Tag? TagInstance { get; set; }
 
+        private bool IsLoading { get; set; } = true;
+
+        private bool Downloading { get; set; } = false;
+
         protected override async Task OnParametersSetAsync()
         {
             if (TagService != null && TagName != null && RepositoryName != null)
             {
+                IsLoading = true;
                 TagInstance = await TagService.GetTag(RepositoryName, TagName);
+                IsLoading = false;
                 StateHasChanged();
             }
         }
@@ -33,6 +40,8 @@ namespace ACRViewer.BlazorServer.Components.Features.Tag
         {
             if (TagService != null && TagName != null && RepositoryName != null)
             {
+                Downloading = true;
+                StateHasChanged();
                 var source = await TagService.DownloadTagSourceCode(RepositoryName, TagName);
                 if (source != null)
                 {
@@ -40,6 +49,8 @@ namespace ACRViewer.BlazorServer.Components.Features.Tag
                     var base64Content = Convert.ToBase64String(Encoding.UTF8.GetBytes(source));
                     await JSRuntime.InvokeVoidAsync("downloadFile", fileName, base64Content, "text/plain");
                 }
+                Downloading = false;
+                StateHasChanged();
             }
         }
     }

@@ -13,12 +13,16 @@ namespace ACRViewer.BlazorServer.Components.Features.Repository
 
         private Core.Models.Repository? RepositoryInstance { get; set; }
 
+        private bool IsLoading { get; set; } = true;
+
         protected override async Task OnParametersSetAsync()
         {
             if (RepositoryService != null && RepositoryName != null)
             {
+                IsLoading = true;
                 RepositoryInstance = await RepositoryService.GetRepository(RepositoryName);
                 StateHasChanged();
+                IsLoading = false;
             }
 
             await base.OnParametersSetAsync();

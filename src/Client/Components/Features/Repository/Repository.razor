@@ -21,14 +21,18 @@
                     <MudCardContent Class="pl-10">
                         <MudGrid>
                             <MudItem xs="6">
-                                <MudTextField Label="Name" Class="mt-2" Value="@RepositoryInstance?.Name" ReadOnly="true" />
-                                <MudTextField Label="Created On" Class="mt-2" Value="@RepositoryInstance?.CreatedDate" ReadOnly="true" />
-                                <MudTextField Label="Manifest Count" Class="mt-2" Value="@RepositoryInstance?.ManifestCount" ReadOnly="true" />
+                                <ShimmerLoad IsLoading="@IsLoading">
+                                    <MudTextField Label="Name" Class="mt-2" Value="@RepositoryInstance?.Name" ReadOnly="true" />
+                                    <MudTextField Label="Created On" Class="mt-2" Value="@RepositoryInstance?.CreatedDate" ReadOnly="true" />
+                                    <MudTextField Label="Manifest Count" Class="mt-2" Value="@RepositoryInstance?.ManifestCount" ReadOnly="true" />
+                                </ShimmerLoad>
                             </MudItem>
                             <MudItem xs="6">
-                                <MudTextField Label="Registry Login Server" Class="mt-2" Value="@RepositoryInstance?.RegistryLoginServer" ReadOnly="true" />
-                                <MudTextField Label="Updated On" Class="mt-2" Value="@RepositoryInstance?.ModifiedDate" ReadOnly="true" />
-                                <MudTextField Label="Tag Count" Class="mt-2" Value="@RepositoryInstance?.TagCount" ReadOnly="true" />
+                                <ShimmerLoad IsLoading="@IsLoading">
+                                    <MudTextField Label="Registry Login Server" Class="mt-2" Value="@RepositoryInstance?.RegistryLoginServer" ReadOnly="true" />
+                                    <MudTextField Label="Updated On" Class="mt-2" Value="@RepositoryInstance?.ModifiedDate" ReadOnly="true" />
+                                    <MudTextField Label="Tag Count" Class="mt-2" Value="@RepositoryInstance?.TagCount" ReadOnly="true" />
+                                </ShimmerLoad>
                             </MudItem>
                         </MudGrid>
                     </MudCardContent>
@@ -39,14 +43,16 @@
     <MudItem xs="12">
         <MudPaper Elevation="25" Class="d-flex flex-row">
             <div style="width:100%;">
-                <MudCard Elevation="0"> 
+                <MudCard Elevation="0">
                     <MudCardContent Class="p-0">
                         <MudTabs Elevation="2" Rounded="true" ApplyEffectsToContainer="true" PanelClass="pa-6">
                             <MudTabPanel Text="Manifest">
                                 <MudText xs="12">
-                                    <pre>
-                                        @(JsonSerializer.Serialize(RepositoryInstance?.Manifest, new JsonSerializerOptions() { WriteIndented = true }))
-                                </pre>
+                                    <ShimmerLoad IsLoading="@IsLoading">
+                                        <pre>
+                                            @(JsonSerializer.Serialize(RepositoryInstance?.Manifest, new JsonSerializerOptions() { WriteIndented = true }))
+                                        </pre>
+                                    </ShimmerLoad>
                                 </MudText>
                             </MudTabPanel>
                         </MudTabs>

@@ -17,11 +17,15 @@ namespace ACRViewer.BlazorServer.Components.Features.Navigation
 
         private MudTreeView<TreeViewItemViewModel> _treeView;
 
+        private bool _isLoading = false;
+
         protected override async Task OnInitializedAsync()
         {
             try
             {
+                _isLoading = true;
                 await LoadRepositories();
+                _isLoading = false;
             }
             catch (Exception ex)
             {

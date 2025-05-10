@@ -1,0 +1,18 @@
+﻿
+@if (IsLoading)
+{
+	<div class="shimmer"></div>
+}
+else
+{
+	@ChildContent
+}
+
+@code
+{
+	[Parameter]
+	public required RenderFragment ChildContent { get; set; }
+
+	[Parameter]
+	public required bool IsLoading { get; set; }
+}

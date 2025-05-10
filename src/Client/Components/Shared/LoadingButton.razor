@@ -1,0 +1,66 @@
+﻿<MudButton Disabled="@Processing" OnClick="ButtonClick" Variant="Variant.Filled" Class="@(Class??string.Empty)" Color="@(ButtonColor.HasValue?ButtonColor.Value:Color.Primary)">
+    @if (Processing)
+    {
+
+        <MudStack Row="true">
+            @if (StartIcon is not null)
+            {
+                <MudProgressCircular Class="ms-n1" Size="Size.Small" Indeterminate="true" />
+            }
+            <MudText Class="ms-2 ml-1 mr-1">@ButtonText</MudText>
+            @if (EndIcon is not null)
+            {
+                <MudProgressCircular Class="ms-n1" Size="Size.Small" Indeterminate="true" />
+            }
+        </MudStack>
+
+
+    }
+    else
+    {
+        <MudStack Row="true">
+            @if (StartIcon is not null)
+            {
+                <MudIcon Icon="@StartIcon" Class="@IconClass" />
+            }
+            <MudText Class="ms-2 ml-1 mr-1">@ButtonText</MudText>
+            @if (EndIcon is not null)
+            {
+                <MudIcon Icon="@EndIcon" Class="@IconClass" />
+            }
+        </MudStack>
+    }
+</MudButton>
+
+@code {
+
+    [Parameter]
+    public bool Processing { get; set; } = false;
+
+    [Parameter]
+    public string? StartIcon { get; set; }
+
+    [Parameter]
+    public string? EndIcon { get; set; }
+
+    [Parameter]
+    public string? IconClass { get; set; }
+
+    [Parameter]
+    public Color? ButtonColor { get; set; }
+
+    [Parameter]
+    public required string ButtonText { get; set; }
+
+    [Parameter]
+    public Action<MouseEventArgs?>? OnButtonClick { get; set; }
+
+    [Parameter]
+    public string? Class { get; set; }
+
+    private void ButtonClick(MouseEventArgs args)
+    {
+        if (OnButtonClick is not null)
+            OnButtonClick(args);
+    }
+}
