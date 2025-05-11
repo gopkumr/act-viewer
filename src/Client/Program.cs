@@ -4,6 +4,8 @@ using Arinco.BicepHub.App.Infrastructure;
 using Microsoft.AspNetCore.Authentication.OpenIdConnect;
 using Microsoft.Identity.Web;
 using Microsoft.Identity.Web.UI;
+using Microsoft.Extensions.Logging.Console;
+using Microsoft.AspNetCore.Authentication.Cookies;
 
 namespace Arinco.BicepHub.App;
 
@@ -15,7 +17,9 @@ public class Program
 
         // Add services to the container.
         builder.Services.AddRazorComponents()
-                        .AddInteractiveServerComponents();
+                        .AddInteractiveServerComponents()
+                        .AddMicrosoftIdentityConsentHandler()
+                        ;
 
         builder.Services.AddAuthentication(OpenIdConnectDefaults.AuthenticationScheme)
                         .AddMicrosoftIdentityWebApp(options =>
@@ -23,7 +27,7 @@ public class Program
                                 builder.Configuration.GetSection("AzureAd").Bind(options);
                                 options.Events.OnRedirectToIdentityProvider = context =>
                                 {
-                                    if (!context.Request.Path.StartsWithSegments("/MicrosoftIdentity/Account"))
+                                    if (!context.Request.Path.StartsWithSegments("/MicrosoftIdentity"))
                                     {
                                         // Redirect to custom login page instead of default
                                         context.Response.Redirect("/login?returnUrl=" + Uri.EscapeDataString(context.Properties.RedirectUri ?? "/"));
@@ -36,16 +40,20 @@ public class Program
                         .EnableTokenAcquisitionToCallDownstreamApi()
                         .AddInMemoryTokenCaches();
 
+        builder.Services.Configure<CookieAuthenticationOptions>(CookieAuthenticationDefaults.AuthenticationScheme, options =>
+        {
+            options.AccessDeniedPath = "/login?reason=access-denied";
+        });
+
         builder.Services.AddRazorPages();
         builder.Services.AddControllersWithViews()
                         .AddMicrosoftIdentityUI();
 
-        builder.Services.AddAuthorization();
-
-        builder.Services.AddHttpContextAccessor();
+        builder.Services.AddAuthorization()
+                        .AddHttpContextAccessor()
+                        .AddLogging(builder => builder.AddConsole());
 
         builder.AddClientServices();
-
         builder.Services.AddInfrastructureServices();
         builder.Services.AddFeatureServices();
 

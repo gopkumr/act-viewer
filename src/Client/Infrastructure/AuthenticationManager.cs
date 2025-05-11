@@ -44,5 +44,14 @@ namespace Arinco.BicepHub.App.Infrastructure
 
             return authenticatedUser;
         }
+
+        public void Logout()
+        {
+            if (memoryCache.TryGetValue("AuthenticatedUser", out User? _))
+            {
+                memoryCache.Remove("AuthenticatedUser");
+            }
+
+        }
     }
 }

@@ -84,6 +84,12 @@ namespace Arinco.BicepHub.App.Components.Shared
             {
                 throw new InvalidOperationException("Navigation Manager not injected");
             }
+            if (AuthenticationManager == null)
+            {
+                throw new InvalidOperationException("Authentication Manager not injected");
+            }
+
+            AuthenticationManager.Logout();
             NavigationManager.NavigateTo("/MicrosoftIdentity/Account/SignOut", forceLoad: true);
         }
 

@@ -25,6 +25,10 @@
                     }
                     else
                     {
+                        if(!string.IsNullOrEmpty(reason))
+                        {
+                            <span>@reason</span>
+                        }
                         <span>Sign in to access your account</span>
                     }
                 </MudText>

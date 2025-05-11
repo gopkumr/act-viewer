@@ -13,7 +13,10 @@ using System.Text.Json.Nodes;
 
 namespace Arinco.BicepHub.App.Infrastructure
 {
-    public class ContainerRegistryClientService(ACRSettings acrSettings, IAuthenticationManager authenticationManager, HttpClient httpClient)
+    public class ContainerRegistryClientService(ACRSettings acrSettings,
+        IAuthenticationManager authenticationManager,
+        HttpClient httpClient,
+        ILogger<ContainerRegistryClientService> logger)
         : IContainerRegistryClientService
     {
         private ContainerRegistryClient? _client;
@@ -41,6 +44,7 @@ namespace Arinco.BicepHub.App.Infrastructure
         {
             await InitialiseClient();
             List<Repository> response = [];
+
             AsyncPageable<string> repositories = _client!.GetRepositoryNamesAsync();
 
             await foreach (string repository in repositories)
@@ -158,7 +162,7 @@ namespace Arinco.BicepHub.App.Infrastructure
             await InitialiseClient(repositoryName);
             GetManifestResult result = await _contentClient!.GetManifestAsync(tagNameOfDigest);
             OciImageManifest? manifest = result?.Manifest?.ToObjectFromJson<OciImageManifest>();
-            if (manifest != null && manifest.Annotations!=null && manifest.Annotations.Documentation!=null)
+            if (manifest != null && manifest.Annotations != null && manifest.Annotations.Documentation != null)
             {
                 var response = await httpClient.GetAsync(manifest.Annotations.Documentation, HttpCompletionOption.ResponseHeadersRead);
                 if (response.IsSuccessStatusCode)

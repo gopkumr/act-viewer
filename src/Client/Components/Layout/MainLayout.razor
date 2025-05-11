@@ -6,29 +6,43 @@
 <MudSnackbarProvider />
 <MudPopoverProvider />
 
-<AuthorizeView>
-    <NotAuthorized>
+<CustomErrorBoundary Context="exception">
+    <ErrorContent>
         <MudLayout Style="height: 100%;">
             <MudMainContent Style="margin: 0; padding: 0; overflow-y: auto">
-                @Body
-            </MudMainContent> 
-        </MudLayout>
-    </NotAuthorized>
-    <Authorized>
-        <MudLayout Style="height: 100%; margin: 0; padding: 0;">
-            <AppBar @bind-CurrentTheme="CurrentTheme" @bind-IsDrawOpen="_drawerOpen" @bind-IsDarkMode="_isDarkMode" />
-            <MudDrawer @bind-Open="_drawerOpen" Width="25%" Elevation="25" ClipMode="DrawerClipMode.Docked">
-                <NavMenu />
-            </MudDrawer>
-            <MudMainContent>
-                <MudContainer MaxWidth="MaxWidth.False" Class="mt-4 h-100">
-                    @Body
-                </MudContainer>
+                <div class="error-content">
+                    <h3>Something went wrong</h3>
+                    <p>@exception.Message</p>
+                    <p>Click <a href="/login" class="reload">here</a> to login again.</p>
+                </div>
             </MudMainContent>
         </MudLayout>
-    </Authorized>
-</AuthorizeView>
-
+    </ErrorContent>
+    <ChildContent>
+        <AuthorizeView>
+            <NotAuthorized>
+                <MudLayout Style="height: 100%;">
+                    <MudMainContent Style="margin: 0; padding: 0; overflow-y: auto">
+                        @Body
+                    </MudMainContent>
+                </MudLayout>
+            </NotAuthorized>
+            <Authorized>
+                <MudLayout Style="height: 100%; margin: 0; padding: 0;">
+                    <AppBar @bind-CurrentTheme="CurrentTheme" @bind-IsDrawOpen="_drawerOpen" @bind-IsDarkMode="_isDarkMode" />
+                    <MudDrawer @bind-Open="_drawerOpen" Width="25%" Elevation="25" ClipMode="DrawerClipMode.Docked">
+                        <NavMenu />
+                    </MudDrawer>
+                    <MudMainContent>
+                        <MudContainer MaxWidth="MaxWidth.False" Class="mt-4 h-100">
+                            @Body
+                        </MudContainer>
+                    </MudMainContent>
+                </MudLayout>
+            </Authorized>
+        </AuthorizeView>
+    </ChildContent>
+</CustomErrorBoundary>
 
 <div id="blazor-error-ui">
     An unhandled error has occurred.

@@ -13,23 +13,35 @@ namespace Arinco.BicepHub.App.Components.Features.Navigation
 
         [Inject] private NavigationManager NavigationManager { get; set; }
 
-        private string _searchPhrase;
+        private string _searchPhrase="";
 
         private MudTreeView<TreeViewItemViewModel> _treeView;
 
         private bool _isLoading = false;
 
+        private string? _loadingError = null;
+
         protected override async Task OnInitializedAsync()
         {
+            _loadingError = null;
             try
             {
                 _isLoading = true;
                 await LoadRepositories();
-                _isLoading = false;
+            }
+            catch(Azure.RequestFailedException reqEx)
+            {
+                _loadingError = $"Failed fetching repositories from Azure Container Registry: {reqEx.Message}";
+                Console.WriteLine(reqEx.StackTrace);
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex.Message);
+                _loadingError = $"Failed to loading repositories {ex.Message}";
+                Console.WriteLine(ex.StackTrace);
+            }
+            finally
+            {
+                _isLoading = false;
             }
         }
 
@@ -106,6 +118,7 @@ namespace Arinco.BicepHub.App.Components.Features.Navigation
             _searchPhrase = searchPhrase;
             await _treeView.FilterAsync();
         }
+
         private Task<bool> MatchesName(TreeItemData<TreeViewItemViewModel> item)
         {
             if (string.IsNullOrEmpty(_searchPhrase))
