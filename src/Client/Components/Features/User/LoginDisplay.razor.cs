@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Components;
+using Microsoft.Extensions.Caching.Memory;
 
 namespace Arinco.BicepHub.App.Components.Features.User
 {
@@ -8,13 +9,16 @@ namespace Arinco.BicepHub.App.Components.Features.User
         private string userName = string.Empty;
         private string reason = string.Empty;
 
+        [Inject] private IMemoryCache? MemoryCache { get; set; } = default!;
+
+
         protected override async Task OnInitializedAsync()
         {
             var authState = await AuthStateProvider.GetAuthenticationStateAsync();
             isAuthenticated = authState.User.Identity?.IsAuthenticated ?? false;
             userName = authState.User.Identity?.Name ?? "Unknown";
 
-            if(Navigation.Uri.Contains("reason"))
+            if (Navigation.Uri.Contains("reason"))
             {
                 var reason = Navigation.GetUriWithQueryParameter("reason", (string?)null);
                 if (reason == "access-denied")
@@ -27,6 +31,11 @@ namespace Arinco.BicepHub.App.Components.Features.User
 
         private void SignIn()
         {
+            if (MemoryCache != null && MemoryCache.TryGetValue("AuthenticatedUser", out _))
+            {
+                MemoryCache.Remove("AuthenticatedUser");
+            }
+
             var returnUrl = Navigation.Uri.Contains("returnUrl")
                 ? Navigation.GetUriWithQueryParameter("returnUrl", (string?)null)
                 : "/";

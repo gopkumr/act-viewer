@@ -50,13 +50,14 @@ namespace Arinco.BicepHub.App.Components.Shared
                 throw new InvalidOperationException("Authentication Manager not injected");
             }
 
-            if(NavigationManager == null)
+            if (NavigationManager == null)
             {
                 throw new InvalidOperationException("Navigation Manager not injected");
             }
 
             try
             {
+
                 var user = await AuthenticationManager.GetAuthenticatedUser() ?? throw new InvalidOperationException("User not authenticated");
                 Email = user.Email;
                 FirstName = user.FirstName;
@@ -74,7 +75,7 @@ namespace Arinco.BicepHub.App.Components.Shared
             }
             catch (MicrosoftIdentityWebChallengeUserException)
             {
-                NavigationManager.NavigateTo("/MicrosoftIdentity/Account/SignIn", forceLoad: true);
+                NavigationManager.NavigateTo("/", forceLoad: false);
             }
         }
 

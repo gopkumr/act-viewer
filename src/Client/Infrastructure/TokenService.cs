@@ -18,16 +18,14 @@ namespace Arinco.BicepHub.App.Infrastructure
             }
             catch (MicrosoftIdentityWebChallengeUserException ex)
             {
-                logger.LogError(ex, "Silent token acquisition failed. User is not authenticated.");
-                // Silent acquisition failed (e.g., token expired), trigger interactive login
-                consentHandler.HandleException(ex);
+                logger.LogWarning(ex, "Silent token acquisition failed. Handling consent and retry.");
+                throw;
             }
             catch (Exception ex1)
             {
                 logger.LogError(ex1, "An error occurred while acquiring the access token.");
-                consentHandler.HandleException(ex1);
+                return string.Empty;
             }
-            return string.Empty;
         }
     }
 }
