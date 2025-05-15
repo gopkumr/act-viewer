@@ -1,6 +1,4 @@
 ﻿using Arinco.BicepHub.App.Core.Interface;
-using Arinco.BicepHub.App.Core.Utilities;
-using Azure.Core;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.Identity.Web;

@@ -1,5 +1,4 @@
-﻿
-namespace Arinco.BicepHub.App.Features.Navigation.Services
+﻿namespace Arinco.BicepHub.App.Features.Shared.Services
 {
     public interface ISharedService
     {

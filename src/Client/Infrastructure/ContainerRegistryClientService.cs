@@ -4,10 +4,7 @@ using Arinco.BicepHub.App.Core.Utilities;
 using Azure;
 using Azure.Containers.ContainerRegistry;
 using SharpCompress.Archives.Tar;
-using SharpCompress.Compressors.Deflate;
-using System;
 using System.IO.Compression;
-using System.Net.Http;
 using System.Text;
 using System.Text.Json.Nodes;
 

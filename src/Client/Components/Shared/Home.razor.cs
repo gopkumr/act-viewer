@@ -1,6 +1,4 @@
-﻿using Arinco.BicepHub.App.Core.Interface;
-using Arinco.BicepHub.App.Core.Utilities;
-using Microsoft.AspNetCore.Components;
+﻿using Arinco.BicepHub.App.Core.Utilities;
 
 namespace Arinco.BicepHub.App.Components.Shared
 {

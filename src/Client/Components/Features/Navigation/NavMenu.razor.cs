@@ -1,5 +1,4 @@
-﻿using Arinco.BicepHub.App.Core.Interface;
-using Arinco.BicepHub.App.Core.Utilities;
+﻿using Arinco.BicepHub.App.Core.Utilities;
 using Arinco.BicepHub.App.Features.Navigation.Services;
 using Microsoft.AspNetCore.Components;
 using MudBlazor;
@@ -13,7 +12,7 @@ namespace Arinco.BicepHub.App.Components.Features.Navigation
 
         [Inject] private NavigationManager NavigationManager { get; set; }
 
-        private string _searchPhrase="";
+        private string _searchPhrase = "";
 
         private MudTreeView<TreeViewItemViewModel> _treeView;
 
@@ -29,7 +28,7 @@ namespace Arinco.BicepHub.App.Components.Features.Navigation
                 _isLoading = true;
                 await LoadRepositories();
             }
-            catch(Azure.RequestFailedException reqEx)
+            catch (Azure.RequestFailedException reqEx)
             {
                 _loadingError = $"Failed fetching repositories from Azure Container Registry: {reqEx.Message}";
                 Console.WriteLine(reqEx.StackTrace);

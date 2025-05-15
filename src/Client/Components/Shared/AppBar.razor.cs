@@ -1,6 +1,6 @@
 ﻿using Arinco.BicepHub.App.Core.Interface;
 using Arinco.BicepHub.App.Core.Utilities;
-using Arinco.BicepHub.App.Features.Navigation.Services;
+using Arinco.BicepHub.App.Features.Shared.Services;
 using Microsoft.AspNetCore.Components;
 using Microsoft.Identity.Web;
 using MudBlazor;

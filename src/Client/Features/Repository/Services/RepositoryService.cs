@@ -1,5 +1,4 @@
 ﻿using Arinco.BicepHub.App.Core.Interface;
-using Arinco.BicepHub.App.Core.Models;
 
 namespace Arinco.BicepHub.App.Features.Repository.Services
 {

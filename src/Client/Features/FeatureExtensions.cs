@@ -1,9 +1,9 @@
-﻿using Arinco.BicepHub.App.Core.Interface;
-using Arinco.BicepHub.App.Features.Navigation.Services;
+﻿using Arinco.BicepHub.App.Features.Navigation.Services;
 using Arinco.BicepHub.App.Features.Repository.Services;
+using Arinco.BicepHub.App.Features.Shared.Services;
 using Arinco.BicepHub.App.Features.Tag.Services;
 
-namespace Arinco.BicepHub.App.Infrastructure
+namespace Arinco.BicepHub.App.Features
 {
     public static class FeatureExtensions
     {
